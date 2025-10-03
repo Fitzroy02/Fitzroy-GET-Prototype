@@ -1,0 +1,14 @@
+# Phase IX Badge Logic
+badges:
+  - badge_id: [badge_1]
+    title: [Badge 1 Title]
+    criteria:
+      - [Criterion 1]
+      - [Criterion 2]
+    status: draft
+  - badge_id: [badge_2]
+    title: [Badge 2 Title]
+    criteria:
+      - [Criterion 1]
+      - [Criterion 2]
+    status: draft

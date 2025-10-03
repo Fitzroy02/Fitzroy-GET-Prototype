@@ -1,0 +1,10 @@
+# Phase IX Scenarios
+scenarios:
+  - scenario_id: [scenario_1]
+    title: [Scenario 1 Title]
+    description: [Describe scenario 1.]
+    status: draft
+  - scenario_id: [scenario_2]
+    title: [Scenario 2 Title]
+    description: [Describe scenario 2.]
+    status: draft

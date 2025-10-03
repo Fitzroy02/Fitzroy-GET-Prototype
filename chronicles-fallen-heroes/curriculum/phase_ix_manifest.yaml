@@ -1,0 +1,10 @@
+phase: IX
+title: Civic Resonance and Ethical Continuity
+description: Phase IX explores the ethical continuity of civic systems through scenario-based rehearsal and resonance-gated logic.
+modules:
+	- module_id: ix_01
+		title: The Echo in the Archive
+		status: draft
+scenarios: []
+badges: []
+status: draft
