@@ -1,56 +1,40 @@
 import streamlit as st
+from datetime import datetime
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
-
-# PDF Display Options
-st.header("📄 How to Display PDFs")
-
-st.subheader("Option 1: Link to an External PDF")
+# Lineage Badge
 st.markdown("""
-You can paste a link to a PDF like this:
-```python
-st.markdown("[View PDF Document](https://example.com/document.pdf)")
-```
-Example: [Sample PDF](https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf)
-""")
+<div style="background-color:#f0f0f0;padding:10px;border-radius:5px;border-left:5px solid #4B0082;">
+    <strong>🪶 Lineage Badge:</strong> Transmission authored by Fitzroy Brian Edwards (John Thought Hope).  
+    This module is part of GETS Studio V-1.1: Echo Threshold, encoded for sonic integrity and civic embed.
+</div>
+""", unsafe_allow_html=True)
 
-st.subheader("Option 2: Display PDF from URL")
-st.markdown("""
-To display a PDF inline using an iframe:
-```python
-pdf_url = "https://example.com/document.pdf"
-st.markdown(f'<iframe src="{pdf_url}" width="700" height="1000" type="application/pdf"></iframe>', unsafe_allow_html=True)
-```
-""")
+# DJ Stream Integrity Helper
+with st.expander("🎧 DJ Stream Integrity – Audio Troubleshooting"):
+    st.markdown("""
+    This module ensures your DJ stream resonates clearly. Use it to diagnose playback issues and uphold sonic integrity.
 
-st.subheader("Option 3: Upload and Display Local PDF")
-st.markdown("""
-To allow users to upload a PDF file:
-```python
-uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
-if uploaded_file is not None:
-    # Display the PDF
-    st.download_button(
-        label="Download PDF",
-        data=uploaded_file,
-        file_name=uploaded_file.name,
-        mime="application/pdf"
-    )
-```
-""")
+    **1. Is the file format supported?**  
+    Streamlit supports MP3, WAV, and OGG formats. Other formats may not play.
 
-# Live Example - PDF File Uploader
-st.divider()
-st.subheader("Try it yourself!")
-uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
-if uploaded_file is not None:
-    st.success(f"File uploaded: {uploaded_file.name}")
-    st.download_button(
-        label="Download PDF",
-        data=uploaded_file,
-        file_name=uploaded_file.name,
-        mime="application/pdf"
-    )
+    **2. Is the file too large or slow to load?**  
+    Large files can cause delays or failures. Try a smaller audio clip to rule out bandwidth or loading issues.
+
+    **3. Is your browser blocking autoplay or sound?**  
+    Many browsers mute autoplay by default. Try pressing play manually or adjust your browser’s sound settings.
+
+    **4. Is the audio hosted locally or remotely?**  
+    - If local: Double-check the file path (it must be accessible to the Streamlit server).  
+    - If remote: Test the URL directly in your browser to ensure it works and is reachable.
+
+    ---
+    _Every stream is a civic gesture. Every sound, a transmission of care._
+    """)
+
+# Embedded DJ Video Stream (replace with your actual video URL)
+video_url = "https://your-hosted-video-link.com/dj_mix.mp4"
+st.video(video_url)
+
+# Timestamp Footer
+timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+st.markdown(f"<small><em>Scaffolded on {timestamp} BST</em></small>", unsafe_allow_html=True)
