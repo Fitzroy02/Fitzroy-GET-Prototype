@@ -2,6 +2,20 @@ import streamlit as st
 import os
 import requests
 from datetime import datetime
+import base64
+import json
+
+
+def get_license_badge(license_type):
+    """Return emoji and tooltip for each license type"""
+    badges = {
+        "Open Civic Read": ("🌿", "This word is wind—free to move, free to meet."),
+        "Scenario Access": ("🔍", "Only in pause, rehearsal, or legacy shall this be revealed."),
+        "Stewarded Access": ("🕊️", "To read is to offer presence. To pay is to honor the breath."),
+        "Downloadable License": ("📦", "This may be carried, but not copied. Steward it well."),
+        "Consignment License": ("🏛️", "This rests in civic hands—placed, not posted.")
+    }
+    return badges.get(license_type, ("❔", "Unknown license type."))
 
 
 def render_phase_vi_dashboard(practitioner, badge_gate, curriculum_loader, annotation_logger):
@@ -12,6 +26,15 @@ def main():
     st.set_page_config(page_title="GETS Studio V-1.6", layout="wide")
     st.title("GETS Studio V-1.6")
     st.subheader("A Civic Rehearsal Portal for Artists, Educators, and Ethical Thought Practitioners")
+
+    # Initialize license registry in session state
+    if "license_registry" not in st.session_state:
+        # Load from JSON file if it exists
+        if os.path.exists("license_registry.json"):
+            with open("license_registry.json", "r") as f:
+                st.session_state.license_registry = json.load(f)
+        else:
+            st.session_state.license_registry = []
 
     # Lineage Badge
     st.markdown("""
@@ -26,24 +49,45 @@ def main():
         ["Ethical Pause", "Civic Rehearsal", "Legacy Stewardship"],
     )
 
+    # Sidebar book upload
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### 📤 Upload The Whistling Wind")
+    # sidebar_uploaded_file = st.sidebar.file_uploader("Upload your PDF", type=["pdf"], key="sidebar_book_upload")
+    sidebar_uploaded_file = None
+
+    if sidebar_uploaded_file is not None:
+        st.sidebar.success("✅ Book uploaded successfully!")
+        st.sidebar.download_button(
+            "📥 Download The Whistling Wind",
+            sidebar_uploaded_file,
+            file_name="the_whistling_wind.pdf",
+            mime="application/pdf"
+        )
+
     # The Whistling Wind Book Section
     with st.expander("📖 The Whistling Wind — Full Book"):
         st.markdown("### 📚 The Whistling Wind by John Thought Hope")
         st.markdown("*A poetic transmission exploring rhythm, resonance, and civic breath.*")
         
-        # Note: Add the_whistling_wind.pdf to your repository to enable download
-        # Uncomment when PDF is available:
-        # import os
-        # if os.path.exists("the_whistling_wind.pdf"):
-        #     with open("the_whistling_wind.pdf", "rb") as f:
-        #         st.download_button(
-        #             "📥 Download The Whistling Wind (PDF)",
-        #             f,
-        #             file_name="the_whistling_wind.pdf",
-        #             mime="application/pdf"
-        #         )
-        
-        st.info("Book preview coming soon. Upload the PDF to enable download and viewing.")
+        if sidebar_uploaded_file is not None:
+            st.markdown("### 📖 The Whistling Wind (Live Preview)")
+            # Reset file pointer to beginning
+            sidebar_uploaded_file.seek(0)
+            base64_pdf = base64.b64encode(sidebar_uploaded_file.read()).decode('utf-8')
+            pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="900" type="application/pdf"></iframe>'
+            st.markdown(pdf_display, unsafe_allow_html=True)
+        else:
+            # Check if PDF exists in repository
+            if os.path.exists("the_whistling_wind.pdf"):
+                with open("the_whistling_wind.pdf", "rb") as f:
+                    st.download_button(
+                        "📥 Download The Whistling Wind (PDF)",
+                        f,
+                        file_name="the_whistling_wind.pdf",
+                        mime="application/pdf"
+                    )
+            else:
+                st.info("📚 Upload the PDF in the sidebar to enable preview and download.")
 
     # Scenario-specific content
     if scenario == "Ethical Pause":
@@ -73,6 +117,130 @@ def main():
         annotating echoes, and ensuring that each gesture carries forward with integrity 
         and resonance.
         """)
+
+    # Civic Licensing Framework
+    st.markdown("---")
+    st.markdown("## 🛡️ Civic Licensing Framework")
+
+    with st.form("upload_form"):
+        st.markdown("### 📤 Upload Your Work")
+        uploaded_file = st.file_uploader(
+            "Upload your file (PDF, MP3, MP4)",
+            type=["pdf", "mp3", "mp4"]
+        )
+
+        st.markdown("### 🧾 Metadata")
+        title = st.text_input("Title of the Work")
+        author = st.text_input("Author / Steward")
+        license_type = st.selectbox("License Type", [
+            "Open Civic Read",
+            "Scenario Access",
+            "Stewarded Access",
+            "Downloadable License",
+            "Consignment License"
+        ])
+        price = st.number_input("Price (£)", min_value=0.0, step=0.5)
+        allow_download = st.checkbox("Allow Download?")
+        preview_length = st.slider("Preview Length (pages)", min_value=1, max_value=20, value=3)
+        scenario_tags = st.multiselect("Scenario Tags", [
+            "Ethical Pause", "Legacy Stewardship", "Civic Rehearsal",
+            "Threshold", "Invocation", "Arrival"
+        ])
+
+        submitted = st.form_submit_button("Submit License")
+
+    if submitted:
+        new_license = {
+            "title": title,
+            "author": author,
+            "license_type": license_type,
+            "price": price,
+            "allow_download": allow_download,
+            "preview_length": preview_length,
+            "scenario_tags": scenario_tags,
+            "filename": uploaded_file.name if uploaded_file else None
+        }
+        
+        # Save uploaded file to uploads directory
+        if uploaded_file is not None:
+            os.makedirs("uploads", exist_ok=True)
+            save_path = os.path.join("uploads", uploaded_file.name)
+            with open(save_path, "wb") as f:
+                f.write(uploaded_file.getbuffer())
+            new_license["file_path"] = save_path
+        
+        st.session_state.license_registry.append(new_license)
+        
+        # Save to JSON file
+        with open("license_registry.json", "w") as f:
+            json.dump(st.session_state.license_registry, f, indent=2)
+        
+        st.success("✅ License submitted successfully!")
+        st.write("**Title:**", title)
+        st.write("**Author:**", author)
+        st.write("**License Type:**", license_type)
+        st.write("**Price:** £", price)
+        st.write("**Download Allowed:**", "Yes" if allow_download else "No")
+        st.write("**Preview Length:**", preview_length, "pages")
+        st.write("**Scenario Tags:**", ", ".join(scenario_tags))
+        if uploaded_file:
+            st.write("**File:**", uploaded_file.name)
+            st.write("**File type:**", uploaded_file.type)
+            st.write("**Saved to:**", save_path)
+            
+            # Live preview based on file type
+            if uploaded_file.type == "application/pdf":
+                st.markdown("### 📖 Live Book Preview")
+                uploaded_file.seek(0)  # Reset pointer
+                base64_pdf = base64.b64encode(uploaded_file.read()).decode('utf-8')
+                pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="900" type="application/pdf"></iframe>'
+                st.markdown(pdf_display, unsafe_allow_html=True)
+            
+            elif uploaded_file.type.startswith("audio"):
+                st.markdown("### 🎵 Audio Preview")
+                st.audio(uploaded_file, format="audio/mp3")
+            
+            elif uploaded_file.type.startswith("video"):
+                st.markdown("### 🎬 Video Preview")
+                st.video(uploaded_file)
+
+    # Display license registry
+    if st.session_state.license_registry:
+        st.markdown("---")
+        st.markdown("## 📚 Registered Works")
+        
+        # Filter by scenario
+        st.markdown("### 🔍 Filter by Scenario")
+        selected_scenarios = st.multiselect(
+            "Choose scenario(s) to explore",
+            ["Ethical Pause", "Legacy Stewardship", "Civic Rehearsal", "Threshold", "Invocation", "Arrival"]
+        )
+        
+        def matches_scenario(entry, selected):
+            return any(tag in entry["scenario_tags"] for tag in selected)
+        
+        filtered_registry = [
+            entry for entry in st.session_state.license_registry
+            if not selected_scenarios or matches_scenario(entry, selected_scenarios)
+        ]
+        
+        st.markdown(f"*Showing {len(filtered_registry)} of {len(st.session_state.license_registry)} works*")
+        st.markdown("---")
+        
+        if not filtered_registry:
+            st.info("🌬️ No works match the selected scenarios. Try a different combination or clear your filter.")
+        
+        for item in filtered_registry:
+            emoji, tooltip = get_license_badge(item["license_type"])
+            st.markdown(f"### {emoji} {item['title']} by {item['author']}")
+            st.caption(f"**License:** {item['license_type']} — *{tooltip}*")
+            st.write("**Price:** £", item["price"])
+            st.write("**Download Allowed:**", "Yes" if item["allow_download"] else "No")
+            st.write("**Preview Length:**", item["preview_length"])
+            st.write("**Scenario Tags:**", ", ".join(item["scenario_tags"]))
+            if item.get('filename'):
+                st.write("**File:**", item['filename'])
+            st.markdown("---")
 
     # DJ Stream Integrity Helper
     with st.expander("🎧 DJ Stream Integrity – Audio Troubleshooting"):

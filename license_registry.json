@@ -1,0 +1,22 @@
+[
+  {
+    "title": "The Whistling Wind",
+    "author": "John Thought Hope",
+    "license_type": "Scenario Access",
+    "price": 0.0,
+    "allow_download": false,
+    "preview_length": 3,
+    "scenario_tags": ["Legacy Stewardship", "Threshold"],
+    "filename": "the_whistling_wind.pdf"
+  },
+  {
+    "title": "Civic Rehearsal: A Primer",
+    "author": "Amina Clarke",
+    "license_type": "Stewarded Access",
+    "price": 4.99,
+    "allow_download": false,
+    "preview_length": 5,
+    "scenario_tags": ["Civic Rehearsal", "Ethical Pause"],
+    "filename": "civic_rehearsal_primer.pdf"
+  }
+]

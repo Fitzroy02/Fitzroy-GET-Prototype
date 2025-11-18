@@ -7,6 +7,22 @@ and this project adheres to civic versioning.
 
 ---
 
+## [v1.2] - 2025-11-18
+
+### Transmission Refined
+- 🌬️ *The Whistling Wind* now flows through a live preview pane—no downloads, no dispersal.
+- 📤 Sidebar upload honors reader agency and authorial care.
+- 🧠 Base64 encoding ensures perceptive rendering, with pointer reset as civic ritual.
+- 📖 Full-width iframe expands the breath of each page.
+
+### Sidebar Refined: The Wind Finds Its Portal
+- 📤 Simplified book upload with cleaner messaging—no confusion, just clarity.
+- 📖 Live preview pane now flows from the sidebar, full-width and expansive.
+- 🛡️ Download button retained for modular use, pending copyright permissions.
+- 🧠 File pointer reset ritualized—each byte read with civic care.
+
+---
+
 ## [v1.1] - 2025-11-18
 
 ### Upload Flow Enhancements
