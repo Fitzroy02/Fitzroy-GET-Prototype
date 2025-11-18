@@ -17,6 +17,24 @@
 
 **Mood Scale:** Resonant
 
+---
+
+## 🎙️ Featured Transmission: The Whistling Wind Series
+
+### 🌬️ The Whistling Wind (Intro)
+[![Watch The Whistling Wind Intro](https://img.youtube.com/vi/QYYvgFzR8Qc/0.jpg)](https://youtu.be/QYYvgFzR8Qc)
+
+> *A poetic invocation by John Thought Hope—where rhythm meets resonance.*
+
+---
+
+### 📢 The Whistling Wind (Ad)
+[![Watch The Whistling Wind Ad](https://img.youtube.com/vi/YTp7UQNE0Dw/0.jpg)](https://youtu.be/YTp7UQNE0Dw)
+
+> *A civic interlude—sponsored breath between uploads, heard only once per session.*
+
+---
+
 # GETS Phase VII: NHS Override Integration
 
 ## Overview

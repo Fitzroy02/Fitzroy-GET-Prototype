@@ -91,7 +91,14 @@ def main():
         if not st.session_state.ad_played:
             st.markdown("---")
             st.subheader("🎬 Sponsored Interlude")
-            st.video("https://your-hosted-link.com/advertisement.mp4")
+            st.markdown("""
+            <iframe width="100%" height="315"
+              src="https://www.youtube.com/embed/YTp7UQNE0Dw"
+              title="The Whistling Wind Ad"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+            """, unsafe_allow_html=True)
             st.session_state.ad_played = True
 
     else:
@@ -132,10 +139,26 @@ def main():
     col1, col2 = st.columns(2)
     
     with col1:
-        st.video("https://your-hosted-link.com/whistling-wind.mp4")
+        st.markdown("**🌬️ The Whistling Wind (Intro)**")
+        st.markdown("""
+        <iframe width="100%" height="315"
+          src="https://www.youtube.com/embed/QYYvgFzR8Qc"
+          title="The Whistling Wind Intro"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        """, unsafe_allow_html=True)
     
     with col2:
-        st.video("https://your-hosted-link.com/advertisement.mp4")
+        st.markdown("**📢 The Whistling Wind (Ad)**")
+        st.markdown("""
+        <iframe width="100%" height="315"
+          src="https://www.youtube.com/embed/YTp7UQNE0Dw"
+          title="The Whistling Wind Ad"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        """, unsafe_allow_html=True)
 
     # Call the Phase VI renderer (placeholder)
     render_phase_vi_dashboard(None, None, None, None)
