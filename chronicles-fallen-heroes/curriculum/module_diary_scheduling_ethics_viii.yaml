@@ -1,0 +1,22 @@
+- module_id: diary_scheduling_ethics_viii
+  title: Diary-Based Scheduling Ethics
+  description: This module reimagines appointment systems to honour rhythm, encrypted history, and diary-informed urgency. Practitioners rehearse scheduling logic that respects lived experience over surface availability.
+  entry_conditions:
+    - practitioner_badge: verified
+    - diary_interface_enabled: true
+    - encrypted_medical_history: accessible
+  required_fragments:
+    - scenario_id: scheduling_with_diary_trace
+  completion_logic:
+    - rehearsal_complete: true
+    - civic_prompt_response: submitted
+    - scheduling_tool_engaged: true
+  review_protocol:
+    - reviewer_role: diary_scheduler
+    - badge_awarded: diary_scheduling_certified
+    - resonance_threshold: rhythm_respected
+  emotional_tools:
+    - rhythm_mapper
+    - trace_scheduler
+  module_phase: viii
+  status: active

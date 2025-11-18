@@ -1,0 +1,24 @@
+{
+  "stewards": [
+    {
+      "name": "Fitzroy Brian Edwards",
+      "badge_id": "GETS-STEW-001",
+      "role": "CEO / Protocol Custodian",
+      "status": "active",
+      "verified": true,
+      "joined": "2025-10-02",
+      "modules_completed": ["Phase VII: Civic Ethics", "Badge Logic & Governance"],
+      "covenant_signed": true
+    },
+    {
+      "name": "Ayo Grace",
+      "badge_id": "GETS-STEW-002",
+      "role": "Board Steward",
+      "status": "active",
+      "verified": true,
+      "joined": "2025-10-02",
+      "modules_completed": ["Phase VII: Civic Ethics", "Badge Logic & Governance"],
+      "covenant_signed": true
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "volumes": [
+    {
+      "title": "Chronicles of the Fallen Heroes",
+      "release_year": 2025,
+      "badge_required": "VolumeGuardian"
+    },
+    {
+      "title": "Chronicles: Rise of the Kin",
+      "release_year": 2026,
+      "badge_required": "LegacyReader"
+    }
+  ]
+}

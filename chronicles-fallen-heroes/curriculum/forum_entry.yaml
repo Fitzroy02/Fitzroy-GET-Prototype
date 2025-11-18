@@ -1,0 +1,11 @@
+forum_entry:
+  badge_required: Practitioner Badge
+  entry_conditions:
+    - trace submitted and approved
+    - practitioner role declared
+    - modules completed: minimum 1
+    - covenant signed
+  permissions:
+    - post reflections
+    - propose modules
+    - participate in ethical rehearsal

@@ -1,0 +1,26 @@
+  badge_logic:
+    - id: "urgency_score"
+      symptom_severity: "moderate"
+      condition_history: "high"
+      diary_alert: "triggered"
+      priority: "Patient B"
+  resonance_threshold: civic_triage_ethics
+  practitioner_roles:
+    - triage_nurse
+    - diary_interface_agent
+    - ethical_scheduler
+   civic_prompts:
+     - "How should urgency be weighed when symptoms differ?"
+  trace_conditions:
+    - diary_entry_present: true
+    - encrypted_medical_history: accessible
+    - practitioner_badge: verified
+  scenario_fragment: >
+    A quiet waiting room. Two patients sit. One scratches their toe, the other breathes shallowly. The receptionist glances at the booking screen. The rash is visible. The heart is not. Who gets seen first?
+  emotional_tool_reference:
+    - tool_name: urgency_resonator
+      purpose: Highlights hidden medical urgency based on diary trace and encrypted history.
+    - tool_name: triage_reflector
+      purpose: Allows practitioners to rehearse ethical prioritization using simulated scenarios.
+  module_phase: viii
+  status: placeholder

@@ -1,0 +1,31 @@
+# Heart Monitor Module Metadata
+---
+module: "heart_monitor"
+status: "inactive"
+activation_conditions:
+  - device_connected: false
+  - author_opt_in: true
+  - civic_review_enabled: false
+tracking_fields:
+  - resting_heart_rate
+  - heart_rate_variability
+  - stress_index
+  - rhythm_disruption
+alert_logic:
+  doctor_alert:
+    enabled: false
+    threshold_conditions:
+      - resting_heart_rate_above: 120 bpm
+      - resting_heart_rate_below: 45 bpm
+      - variability_drop: sustained over 3 days
+      - rhythm_disruption: true
+consent_required: true
+privacy_mode: "author-controlled"
+device_integration:
+  supported_devices:
+    - Apple Watch
+    - Fitbit
+    - Garmin
+    - Google Pixel Watch
+  api_required: true
+  sync_frequency: "daily"

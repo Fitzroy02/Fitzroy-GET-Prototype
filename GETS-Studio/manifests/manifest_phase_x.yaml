@@ -1,0 +1,51 @@
+---
+manifest_id: manifest_phase_x
+phase: X
+purpose: >
+  This manifest anchors scenario lineage, badge logic, and curriculum integration for GETS Studio. It provides a structured mapping of scenarios to badges, curriculum hooks, and ethical cues, ensuring provenance and civic resonance across the curriculum.
+scenarios:
+  - id: scenario_01_secular_vs_natural_law
+    file: scenarios/scenario_01_secular_vs_natural_law.md
+    badge: badge_01_civic_resonance
+    curriculum_hook: Civic perception, secular vs. natural law
+  - id: scenario_02_in_need_of_help
+    file: scenarios/scenario_02_in_need_of_help.md
+    badge: badge_01_civic_resonance
+    curriculum_hook: Mental health, civic responsibility
+  - id: scenario_03_trying_to_tell
+    file: scenarios/scenario_03_trying_to_tell.md
+    badge: badge_02_relational_friction
+    curriculum_hook: Relational ethics, care and control
+  - id: scenario_04_my_mind
+    file: scenarios/scenario_04_my_mind.md
+    badge: badge_03_perception_loop
+    curriculum_hook: Digital identity, civic suspicion
+  - id: scenario_05_first_nights_raving
+    file: scenarios/scenario_05_first_nights_raving.md
+    badge: badge_04_rhythmic_resistance
+    curriculum_hook: Musical identity, communal pulse
+  - id: scenario_06_the_bodys_role
+    file: scenarios/scenario_06_the_bodys_role.md
+    badge: badge_05_embodied_warning
+    curriculum_hook: Public safety, systemic neglect
+  - id: scenario_07_lessons_in_love
+    file: scenarios/scenario_07_lessons_in_love.md
+    badge: badge_06_relational_test
+    curriculum_hook: Romantic trust, emotional testing
+  - id: scenario_08_am_i_well_or_not
+    file: scenarios/scenario_08_am_i_well_or_not.md
+    badge: badge_07_logic_decree
+    curriculum_hook: Mental clarity, institutional response
+  - id: scenario_09_whats_happening
+    file: scenarios/scenario_09_whats_happening.md
+    badge: badge_08_threshold_fracture
+    curriculum_hook: Breakdown, relational care, authority
+  - id: scenario_10_dual_meaning
+    file: scenarios/scenario_10_dual_meaning.md
+    badge: badge_09_symbolic_decree
+    curriculum_hook: Naming, trauma, metaphysical assertion
+provenance:
+  commit_hash: [INSERT_COMMIT_HASH]
+  author: Fitzroy Edwards
+  date: [INSERT_DATE]
+---

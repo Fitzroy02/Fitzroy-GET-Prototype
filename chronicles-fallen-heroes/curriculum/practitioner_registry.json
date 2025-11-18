@@ -1,0 +1,17 @@
+{
+  "practitioners": [
+    {
+      "name": "Imani Rivers",
+      "badge_id": "GETS-PRAC-001",
+      "role": "Educator",
+      "status": "active",
+      "verified": true,
+      "joined": "2025-10-02",
+      "modules_completed": [
+        "Module 01: Attuned Ethics",
+        "Module 02: Relational Boundaries in AI"
+      ],
+      "covenant_signed": true
+    }
+  ]
+}

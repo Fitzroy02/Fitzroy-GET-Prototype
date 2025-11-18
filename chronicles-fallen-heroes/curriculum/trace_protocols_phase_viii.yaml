@@ -1,0 +1,21 @@
+- module: Phase VIII - Module 6
+  badge: Attunement Operator
+  trace_protocol:
+    required_fields:
+      - emotional signal parsed
+      - operational timing adjusted
+      - literacy cue activated
+    submission_format: JSON or civic-formatted markdown
+    review_logic: Trace must demonstrate rhythmic pacing and care-based clarity
+    resonance_threshold: 0.85
+
+- module: Phase VIII - Module 7
+  badge: Embodiment Steward
+  trace_protocol:
+    required_fields:
+      - stance declared
+      - posture mapped
+      - testimony encoded
+    submission_format: JSON or ritualized civic form
+    review_logic: Trace must reflect embodied presence and ethical stance
+    resonance_threshold: 0.90

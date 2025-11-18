@@ -1,0 +1,8 @@
+# Film Reference Template
+---
+id: <scene_id>
+title: <Scene Title>
+film_url: <URL to film asset or embed>
+scenario_id: <Linked Scenario ID>
+playback_interface: <embedded | link-out | vimeo | youtube | github>
+description: <Describe the scene, its purpose, and mapping to scenario>

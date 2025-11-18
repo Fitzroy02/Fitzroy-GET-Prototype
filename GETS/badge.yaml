@@ -1,0 +1,12 @@
+badge:
+  name: Steward Badge
+  type: governance
+  issued_by: GETS Badge Registry
+  permissions:
+    - vote_on_budget
+    - approve_ceo_salary
+    - ratify_financial_promise
+  requirements:
+    - verified identity
+    - signed GETS Covenant
+    - active participation in 2+ civic modules

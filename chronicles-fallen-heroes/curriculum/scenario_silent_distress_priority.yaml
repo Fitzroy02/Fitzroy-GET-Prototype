@@ -1,0 +1,5 @@
+- scenario_id: silent_distress_priority
+  title: The Silence That Screamed
+  description: An adult books a routine check-up. Diary trace shows escalating emotional distress. No visible symptoms. The system must decide urgency.
+  resonance_threshold: invisible_urgency_respected
+  linked_module: mental_health_triage_viii

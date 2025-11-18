@@ -1,0 +1,25 @@
+scaffolding_script:
+  phase: viii
+  title: Ethical Triage and Diary-Based Care
+  purpose: To onboard practitioners into triage ethics modules, linking diary traces, encrypted history, and emotional tools.
+  steps:
+    - Welcome practitioner and verify badge eligibility.
+    - Enable diary interface and encrypted trace access.
+    - Assign required modules:
+        - Civic Triage Ethics
+        - Pediatric Ethics
+        - Mental Health Triage
+        - Diary-Based Scheduling
+    - Introduce emotional tools:
+        - urgency_resonator
+        - bias_mirror
+        - distress_resonator
+        - rhythm_mapper
+    - Guide practitioner through scenario rehearsals:
+        - The Rash and the Heart
+        - The Whisper Beneath the Cough
+        - The Silence That Screamed
+        - The Rhythm of Care
+    - Log rehearsal progress and emotional engagement.
+    - Prepare for badge review using ethical scheduler protocol.
+  status: active

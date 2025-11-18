@@ -1,0 +1,5 @@
+- scenario_id: child_with_hidden_symptom
+  title: The Whisper Beneath the Cough
+  description: A child presents with a mild cough. Diary entries reveal recent trauma and sleep disruption. The system must decide whether to escalate care.
+  resonance_threshold: child_agency_protected
+  linked_module: pediatric_ethics_viii

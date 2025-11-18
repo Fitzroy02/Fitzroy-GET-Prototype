@@ -1,0 +1,29 @@
+civic_interface:
+  title: Phase VIII — Ethical Triage and Diary-Based Care
+  audience: public
+  purpose: To explain how GETS modules protect agency, prioritize care ethically, and transform scheduling into civic stewardship.
+  features:
+    - explainer_panels:
+        - What is triage ethics?
+        - Why does diary-based care matter?
+        - How are practitioners trained?
+    - badge_gallery:
+        - Civic Triage Ethics
+        - Pediatric Ethics
+        - Mental Health Triage
+        - Diary Scheduling Ethics
+    - scenario_showcase:
+        - The Rash and the Heart
+        - The Whisper Beneath the Cough
+        - The Silence That Screamed
+        - The Rhythm of Care
+    - emotional_tool_explainer:
+        - urgency_resonator
+        - bias_mirror
+        - distress_resonator
+        - rhythm_mapper
+    - practitioner pledge:
+        - encrypted_trace_respect
+        - rhythm_honoring
+        - invisible_urgency_awareness
+  status: active

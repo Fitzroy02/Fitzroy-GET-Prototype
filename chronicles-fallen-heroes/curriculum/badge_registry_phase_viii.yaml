@@ -1,0 +1,17 @@
+- badge: Attunement Operator
+  module: Phase VIII - Module 6
+  permissions:
+    - Parse emotional signals in civic-grade systems
+    - Modulate operational timing based on attunement
+    - Activate literacy protocols for care-based infrastructure
+  trace_required: true
+  registry_status: active
+
+- badge: Embodiment Steward
+  module: Phase VIII - Module 7
+  permissions:
+    - Map posture and stance in civic roles
+    - Submit embodied traces to legacy systems
+    - Rehearse ethical stance in ritualized civic settings
+  trace_required: true
+  registry_status: active

@@ -1,0 +1,35 @@
+badge_manifest:
+  phase: viii
+  badges:
+    - badge_id: civic_triage_ethics_certified
+      title: Civic Triage Ethics
+      awarded_by: ethical_scheduler
+      criteria:
+        - scenario_rehearsal: rash_vs_heart_priority
+        - emotional_tool_engagement: urgency_resonator
+        - civic_prompt_response: submitted
+        - review_passed: true
+    - badge_id: pediatric_ethics_certified
+      title: Pediatric Ethics
+      awarded_by: pediatric_ethics_guardian
+      criteria:
+        - scenario_rehearsal: child_with_hidden_symptom
+        - emotional_tool_engagement: bias_mirror
+        - civic_prompt_response: submitted
+        - review_passed: true
+    - badge_id: mental_health_triage_certified
+      title: Mental Health Triage
+      awarded_by: mental_health_ethicist
+      criteria:
+        - scenario_rehearsal: silent_distress_priority
+        - emotional_tool_engagement: distress_resonator
+        - civic_prompt_response: submitted
+        - review_passed: true
+    - badge_id: diary_scheduling_certified
+      title: Diary Scheduling Ethics
+      awarded_by: diary_scheduler
+      criteria:
+        - scenario_rehearsal: scheduling_with_diary_trace
+        - emotional_tool_engagement: rhythm_mapper
+        - civic_prompt_response: submitted
+        - review_passed: true

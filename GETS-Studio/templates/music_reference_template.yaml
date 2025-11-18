@@ -1,0 +1,10 @@
+# Music Reference Template
+---
+id: <track_id>
+title: <Track Title>
+artist: <Artist Name>
+file_url: <URL to audio file or embed>
+format: <MP3 | WAV | OGG>
+duration: <e.g., 2m30s>
+description: <Describe the track, its purpose, and mapping to scenario or scene>
+linked_scenario: <Scenario ID, if applicable>

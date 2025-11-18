@@ -1,0 +1,1 @@
+"GETS transforms triage from symptom-first to context-aware. With encrypted diaries and urgency scoring, practitioners prioritize care based on lived history—not just visible complaints."

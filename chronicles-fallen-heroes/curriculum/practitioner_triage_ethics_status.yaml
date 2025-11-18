@@ -1,0 +1,23 @@
+- practitioner_id: triage_ethics_practitioner
+  name: [Insert Practitioner Name]
+  role: ethical_scheduler
+  badge_status:
+    civic_triage_ethics_viii: pending
+    pediatric_ethics_viii: pending
+    mental_health_triage_viii: pending
+    diary_scheduling_ethics_viii: pending
+  diary_interface_enabled: true
+  encrypted_trace_access: granted
+  rehearsal_log:
+    - scenario_id: rash_vs_heart_priority
+      status: complete
+    - scenario_id: child_with_hidden_symptom
+      status: pending
+    - scenario_id: silent_distress_priority
+      status: pending
+    - scenario_id: scheduling_with_diary_trace
+      status: pending
+  emotional_tools_engaged:
+    - urgency_resonator: true
+    - triage_reflector: true
+  review_ready: false

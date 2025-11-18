@@ -1,0 +1,13 @@
+badge:
+  name: Practitioner Badge
+  type: curriculum
+  issued_by: GETS Badge Registry
+  permissions:
+    - access_phase_vii_modules
+    - submit_completion_trace
+    - participate_in_civic_forum
+  requirements:
+    - signed GETS Covenant
+    - completed minimum 1 curriculum module
+    - submitted trace aligned with module purpose
+    - reviewed ethical drift and recovery protocol

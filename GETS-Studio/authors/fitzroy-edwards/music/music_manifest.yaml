@@ -1,0 +1,12 @@
+# Music Manifest
+---
+tracks:
+  - id: track_01_legacy_theme
+    title: "Legacy Theme"
+    composer: "Fitzroy Brian Edwards"
+    file_url: "<insert link or embed>"
+    format: "MP3"
+    duration: "2m15s"
+    mood: "Reflective, ceremonial"
+    linked_scenario: WW3.2
+    usage_rights: "Provided by author"

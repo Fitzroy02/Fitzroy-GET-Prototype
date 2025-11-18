@@ -1,0 +1,35 @@
+legacy_activation_trace:
+  phase: viii
+  activated_by: triage_ethics_practitioner
+  modules_engaged:
+    - civic_triage_ethics_viii:
+        activated_at: 2025-10-03T13:45:00+01:00
+        scenario: rash_vs_heart_priority
+        emotional_tools:
+          - urgency_resonator
+          - triage_reflector
+    - pediatric_ethics_viii:
+        activated_at: pending
+        scenario: child_with_hidden_symptom
+        emotional_tools:
+          - bias_mirror
+          - diary_guardian
+    - mental_health_triage_viii:
+        activated_at: pending
+        scenario: silent_distress_priority
+        emotional_tools:
+          - distress_resonator
+          - silence_amplifier
+    - diary_scheduling_ethics_viii:
+        activated_at: pending
+        scenario: scheduling_with_diary_trace
+        emotional_tools:
+          - rhythm_mapper
+          - trace_scheduler
+  resonance_thresholds_triggered:
+    - civic_triage_ethics
+  badge_status:
+    civic_triage_ethics_certified: false
+    pediatric_ethics_certified: false
+    mental_health_triage_certified: false
+    diary_scheduling_certified: false

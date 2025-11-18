@@ -1,0 +1,22 @@
+vote:
+  id: vote-001
+  title: Ratify CEO Salary & Financial Promise
+  date: 2025-10-02
+  proposed_by: Fitzroy Brian Edwards
+  description: |
+    This vote ratifies the inclusion of a market-rate salary for the CEO/Protocol Custodian
+    within the Stewardship & Outreach Budget, and affirms the GETS Financial Promise
+    as encoded in `promise.md`.
+
+  quorum_required: 2
+  badge_required: Steward Badge
+  options:
+    - approve
+    - reject
+    - abstain
+
+  votes:
+    - steward: GETS-STEW-001
+      name: Fitzroy Brian Edwards
+      vote: approve
+      trace: "As Custodian, I affirm the covenantal structure and approve the encoded salary logic."

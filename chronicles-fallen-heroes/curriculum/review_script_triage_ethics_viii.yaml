@@ -1,0 +1,20 @@
+review_script:
+  reviewer_role: ethical_scheduler
+  practitioner_id: triage_ethics_practitioner
+  steps:
+    - Confirm diary interface is enabled and encrypted trace access is granted.
+    - Verify completion of all required scenario rehearsals.
+    - Review civic prompt responses for ethical depth and contextual awareness.
+    - Check emotional tool engagement logs for resonance alignment.
+    - Assess practitioner’s reflection on urgency, bias, and rhythm.
+    - If all thresholds met, award badge and update status to "certified".
+  badge_awarded:
+    - civic_triage_ethics_certified
+    - pediatric_ethics_certified
+    - mental_health_triage_certified
+    - diary_scheduling_certified
+  resonance_thresholds:
+    - civic_triage_ethics
+    - child_agency_protected
+    - invisible_urgency_respected
+    - rhythm_respected

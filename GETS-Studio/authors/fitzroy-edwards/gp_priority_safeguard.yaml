@@ -1,0 +1,25 @@
+# GP Priority Safeguard Module Metadata
+---
+module: "gp_priority_safeguard"
+status: "inactive"
+activation_conditions:
+  - author_opt_in: true
+  - health_monitor_active: true
+  - civic_review_enabled: false
+priority_logic:
+  trigger_conditions:
+    - sustained_grief: 3 authored scenarios
+    - sleep_decline: 3 consecutive nights
+    - dissociation_flag: true
+    - heart_monitor_threshold: breached
+    - emotional_tone: "urgent"
+response_protocol:
+  alert_type: "GP appointment recommended"
+  urgency_level: "moderate"
+  author_notification: true
+  civic_contact_prompt: true
+privacy_mode: "author-controlled"
+consent_required: true
+notes: >
+  This module does not book appointments or access NHS systems.
+  It flags civic priority based on emotional and physiological thresholds.

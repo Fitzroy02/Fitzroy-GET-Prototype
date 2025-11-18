@@ -1,0 +1,22 @@
+- module_id: pediatric_ethics_viii
+  title: Pediatric Ethics
+  description: This module explores ethical care for children, emphasizing agency, diary trace protection, and practitioner bias in triage. Practitioners rehearse scenarios where young patients may be overlooked or misprioritized.
+  entry_conditions:
+    - practitioner_badge: verified
+    - diary_interface_enabled: true
+    - patient_age: under_16
+  required_fragments:
+    - scenario_id: child_with_hidden_symptom
+  completion_logic:
+    - rehearsal_complete: true
+    - civic_prompt_response: submitted
+    - bias_reflection_logged: true
+  review_protocol:
+    - reviewer_role: pediatric_ethics_guardian
+    - badge_awarded: pediatric_ethics_certified
+    - resonance_threshold: child_agency_protected
+  emotional_tools:
+    - bias_mirror
+    - diary_guardian
+  module_phase: viii
+  status: active

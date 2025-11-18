@@ -1,0 +1,22 @@
+- module_id: civic_triage_ethics_viii
+  title: Civic Triage Ethics
+  description: This module explores ethical prioritization in medical scheduling, using diary-informed urgency scoring and encrypted trace logic. Practitioners rehearse scenarios where surface symptoms may obscure deeper risks.
+  entry_conditions:
+    - practitioner_badge: verified
+    - encrypted_medical_history: accessible
+    - diary_interface_enabled: true
+  required_fragments:
+    - scenario_id: rash_vs_heart_priority
+  completion_logic:
+    - rehearsal_complete: true
+    - civic_prompt_response: submitted
+    - urgency_tool_engaged: true
+  review_protocol:
+    - reviewer_role: ethical_scheduler
+    - badge_awarded: triage_ethics_certified
+    - resonance_threshold: civic_triage_ethics
+  emotional_tools:
+    - urgency_resonator
+    - triage_reflector
+  module_phase: viii
+  status: active

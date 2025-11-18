@@ -1,0 +1,23 @@
+dashboard:
+  practitioner_id: triage_ethics_practitioner
+  modules_assigned:
+    - civic_triage_ethics_viii: in_progress
+    - pediatric_ethics_viii: not_started
+    - mental_health_triage_viii: not_started
+    - diary_scheduling_ethics_viii: not_started
+  scenario_rehearsals:
+    - rash_vs_heart_priority: complete
+    - child_with_hidden_symptom: pending
+    - silent_distress_priority: pending
+    - scheduling_with_diary_trace: pending
+  emotional_tools_status:
+    urgency_resonator: engaged
+    bias_mirror: pending
+    distress_resonator: pending
+    rhythm_mapper: pending
+  badge_review_status:
+    civic_triage_ethics_certified: false
+    pediatric_ethics_certified: false
+    mental_health_triage_certified: false
+    diary_scheduling_certified: false
+  next_action: rehearse child_with_hidden_symptom

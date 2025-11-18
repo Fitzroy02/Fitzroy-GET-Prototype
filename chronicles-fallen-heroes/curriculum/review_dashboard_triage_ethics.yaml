@@ -1,0 +1,22 @@
+review_dashboard:
+  reviewer_id: ethical_scheduler
+  phase: viii
+  practitioners:
+    - practitioner_id: triage_ethics_practitioner
+      modules:
+        civic_triage_ethics_viii: complete
+        pediatric_ethics_viii: in_progress
+        mental_health_triage_viii: not_started
+        diary_scheduling_ethics_viii: not_started
+      scenario_rehearsals:
+        rash_vs_heart_priority: complete
+        child_with_hidden_symptom: pending
+        silent_distress_priority: pending
+        scheduling_with_diary_trace: pending
+      emotional_tools_engaged:
+        urgency_resonator: true
+        bias_mirror: false
+        distress_resonator: false
+        rhythm_mapper: false
+      badge_review_ready: false
+  next_action: prompt practitioner to rehearse pediatric scenario

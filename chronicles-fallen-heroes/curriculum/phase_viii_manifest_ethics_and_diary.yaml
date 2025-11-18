@@ -1,0 +1,23 @@
+phase_id: viii
+title: Ethical Triage and Diary-Based Care
+description: This phase explores ethical prioritization in medical scheduling, focusing on pediatric agency, mental health urgency, and diary-informed rhythm. Modules are badge-gated and scenario-linked for practitioner rehearsal.
+modules:
+  - civic_triage_ethics_viii
+  - pediatric_ethics_viii
+  - mental_health_triage_viii
+  - diary_scheduling_ethics_viii
+scenarios:
+  - rash_vs_heart_priority
+  - child_with_hidden_symptom
+  - silent_distress_priority
+  - scheduling_with_diary_trace
+emotional_tools:
+  - urgency_resonator
+  - triage_reflector
+  - bias_mirror
+  - diary_guardian
+  - distress_resonator
+  - silence_amplifier
+  - rhythm_mapper
+  - trace_scheduler
+status: active

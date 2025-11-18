@@ -1,0 +1,25 @@
+vote:
+  id: vote-002
+  title: Activate Second Steward Badge & Expand Quorum
+  date: 2025-10-02
+  proposed_by: Fitzroy Brian Edwards
+  description: |
+    This vote confirms the onboarding of Ayo Grace as the second Steward,
+    activates their badge, and expands the quorum for future governance decisions.
+
+  quorum_required: 2
+  badge_required: Steward Badge
+  options:
+    - approve
+    - reject
+    - abstain
+
+  votes:
+    - steward: GETS-STEW-001
+      name: Fitzroy Brian Edwards
+      vote: approve
+      trace: "I affirm the onboarding of Ayo Grace and welcome their voice into the quorum."
+    - steward: GETS-STEW-002
+      name: Ayo Grace
+      vote: approve
+      trace: "I accept the badge and commit to the Covenant. I join the quorum in service of civic-grade care."

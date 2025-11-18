@@ -1,0 +1,5 @@
+- scenario_id: scheduling_with_diary_trace
+  title: The Rhythm of Care
+  description: A patient’s diary shows recurring fatigue and missed meals. The system must schedule an appointment that honours their rhythm and history.
+  resonance_threshold: rhythm_respected
+  linked_module: diary_scheduling_ethics_viii

@@ -1,0 +1,24 @@
+{
+  "audit_trail_event": {
+    "event_id": "override_2025_001",
+    "timestamp": "2025-10-01T08:40:00Z",
+    "user_id": "GETS_user_001",
+    "badge_id": "override_seal",
+    "mood_scale": "critical_low",
+    "seal_status": "fractured",
+    "practitioner_echo": "null",
+    "override_triggered": true,
+    "notification_channel": "NHS_emergency_channel",
+    "privacy_clause_status": "temporarily_suspended",
+    "location": {
+      "latitude": "51.5560",
+      "longitude": "-0.0930",
+      "region": "Newington Green, London N16"
+    },
+    "system_signature": {
+      "app_version": "GETS_v7.0",
+      "device_type": "wearable_linked",
+      "override_module": "flutter_override_handler"
+    }
+  }
+}

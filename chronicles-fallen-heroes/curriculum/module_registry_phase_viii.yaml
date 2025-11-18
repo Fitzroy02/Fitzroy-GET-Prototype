@@ -1,0 +1,25 @@
+phase: VIII
+modules:
+  - id: 6
+    title: Resonance Calibration
+    status: active
+    logic_file: resonance_thresholds_phase_viii.yaml
+    badge_conditions:
+      - resonance_score >= threshold
+      - ethical_alignment == true
+
+  - id: 7
+    title: Ethical Review Logic
+    status: active
+    logic_file: resonance_thresholds_phase_viii.yaml
+    badge_conditions:
+      - trace_integrity == verified
+      - civic_resonance >= threshold
+
+  - id: 8
+    title: Weaving Humour Into Depth
+    status: active
+    logic_file: chapter_22_trace_logic.yaml
+    badge_conditions:
+      - rehearsal_score >= threshold
+      - legacy_alignment == true

@@ -1,0 +1,28 @@
+activation_trace:
+  practitioner_id: triage_ethics_practitioner
+  phase: viii
+  modules_engaged:
+    - civic_triage_ethics_viii:
+        activated_at: 2025-10-03T13:45:00+01:00
+        emotional_tools:
+          - urgency_resonator
+          - triage_reflector
+        scenario_linked: rash_vs_heart_priority
+    - pediatric_ethics_viii:
+        activated_at: pending
+        emotional_tools:
+          - bias_mirror
+          - diary_guardian
+        scenario_linked: child_with_hidden_symptom
+    - mental_health_triage_viii:
+        activated_at: pending
+        emotional_tools:
+          - distress_resonator
+          - silence_amplifier
+        scenario_linked: silent_distress_priority
+    - diary_scheduling_ethics_viii:
+        activated_at: pending
+        emotional_tools:
+          - rhythm_mapper
+          - trace_scheduler
+        scenario_linked: scheduling_with_diary_trace

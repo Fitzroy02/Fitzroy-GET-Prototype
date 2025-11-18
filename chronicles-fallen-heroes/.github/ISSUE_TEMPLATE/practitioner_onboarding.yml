@@ -1,0 +1,45 @@
+name: Practitioner Onboarding
+description: Submit your trace and request badge activation
+title: "[Practitioner Onboarding] Your Name"
+labels: [onboarding, practitioner]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Welcome to GETS. Please complete the fields below to request your Practitioner Badge.
+
+  - type: input
+    id: name
+    attributes:
+      label: Your Full Name
+      placeholder: e.g., Imani Rivers
+
+  - type: input
+    id: role
+    attributes:
+      label: Practitioner Role
+      placeholder: e.g., Educator, Therapist, Civic Worker
+
+  - type: checkboxes
+    id: modules
+    attributes:
+      label: Modules Completed
+      options:
+        - label: Module 01: Attuned Ethics
+        - label: Module 02: Relational Boundaries in AI
+        - label: Module 03: Ethical Drift & Protocol Recovery
+        - label: Module 04: Trace Submission & Ethical Resonance
+        - label: Module 05: Civic Forum Participation & Ethical Dialogue
+
+  - type: textarea
+    id: trace
+    attributes:
+      label: Completion Trace
+      description: Describe your ethical stance, practitioner role, and resonance with the GETS Covenant
+
+  - type: checkboxes
+    id: covenant
+    attributes:
+      label: Covenant Signed
+      options:
+        - label: I affirm that I have read and signed the GETS Covenant

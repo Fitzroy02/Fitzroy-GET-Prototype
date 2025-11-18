@@ -1,0 +1,13 @@
+# Music Track Metadata
+---
+track_id: "legacy_theme_01"
+title: "The Wind’s Declaration"
+linked_scenario: WW3.2
+composer: "Fitzroy Brian Edwards"
+duration: "2m15s"
+format: "MP3"
+mood: "Reflective, ceremonial"
+usage_rights: "Declared by author"
+content_rating: "Universal"
+youth_safeguard: true
+trigger_warnings: []

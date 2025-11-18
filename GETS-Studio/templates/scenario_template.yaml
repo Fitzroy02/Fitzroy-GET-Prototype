@@ -1,0 +1,7 @@
+# Scenario Template
+scenario_id: [unique_id]
+title: [Scenario Title]
+description: [Brief description]
+status: draft
+film_reference: "<URL to film asset or embed>"
+playback_interface: "embedded | link-out | vimeo | youtube | github"

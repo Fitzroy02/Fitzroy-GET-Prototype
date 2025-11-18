@@ -1,0 +1,5 @@
+urgency_score:
+  - symptom_severity: moderate
+  - condition_history: high
+  - diary_alert: triggered
+priority: Patient B

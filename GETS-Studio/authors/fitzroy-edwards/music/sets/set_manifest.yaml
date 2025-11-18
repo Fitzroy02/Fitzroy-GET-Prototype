@@ -1,0 +1,9 @@
+# Set Manifest
+---
+sets:
+  - id: set_01_soulful_resonance
+    title: "Soulful Resonance"
+    description: "A DJ set for civic ceremonies and reflective gatherings."
+    tracks:
+      - track_01_legacy_theme
+      - track_02_ritual_intro

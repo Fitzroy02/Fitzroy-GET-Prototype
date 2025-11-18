@@ -1,0 +1,24 @@
+---
+network_manifest: gets_studio_ports
+author: Fitzroy Brian Edwards (John T. Hope)
+linked_manifest: john_t_hope_manifest.yaml
+
+port_forwarding:
+  mode: hybrid
+  environments:
+    - docker
+    - wsl
+    - virtualbox
+    - native
+  manual_required_for:
+    - 5432  # badge database
+    - 8000  # scenario preview
+    - 5000  # civic echo server
+
+gets_ports:
+  - 3000: studio interface
+  - 5432: badge database
+  - 8000: scenario preview
+  - 5000: civic echo server
+  - 22: SSH access (if remote rehearsal is needed)
+---

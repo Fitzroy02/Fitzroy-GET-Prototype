@@ -1,0 +1,26 @@
+# Music Set Metadata
+---
+set_id: "soulful_resonance_01"
+title: "Soulful Resonance: A Legacy Mix"
+curator: "DJ Fitz"
+linked_scenarios:
+  - WW3.2
+  - WW6.1
+  - WW9.4
+duration: "45m"
+format: "MP3"
+mood: "Ceremonial, reflective, communal"
+usage_rights: "Declared by curator"
+content_rating: "Universal"
+youth_safeguard: true
+trigger_warnings: []
+tracklist:
+  - track_id: "legacy_theme_01"
+    title: "The Wind’s Declaration"
+    timestamp: "00:00"
+  - track_id: "ritual_intro_02"
+    title: "Threshold Bells"
+    timestamp: "03:15"
+  - track_id: "urban_soul_03"
+    title: "Kinship Pulse"
+    timestamp: "10:40"

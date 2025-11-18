@@ -1,0 +1,14 @@
+# Film Links Mapping
+---
+scenes:
+  - id: scene_01_intro
+    title: "Intro"
+    film_url: "<insert link or embed>"
+    scenario_id: WW1.1
+  - id: scene_02_pause
+    title: "The Unspoken Pause"
+    linked_scenario: WW3.2
+    description: "Short film exploring the emotional weight of silence and wind as metaphor."
+    media_link: "https://github.com/fitzroy-edwards/films/scene_02_pause.mp4"
+    duration: "3m45s"
+    format: "MP4"

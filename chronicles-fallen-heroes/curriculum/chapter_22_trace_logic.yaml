@@ -1,0 +1,24 @@
+chapter: 22
+title: Weaving Humour Into Depth
+theme: Remixing wit and sorrow for civic resonance
+logic:
+  trace_conditions:
+    - humour_depth_ratio >= 0.7
+    - sorrow_echo_detected == true
+    - timing_refinement == validated
+  badge_conditions:
+    - emotional_tuning == attuned
+    - civic_applicability == confirmed
+    - remix_style in ["parable", "one-liner", "diary stream"]
+examples:
+  grounded_wisdom:
+    - "Even a cracked pot carries water."
+    - "Joy’s not loud, it’s the quiet bit that stays after the music fades."
+    - "Sadness is a good listener. Joy is a good dancer. Sometimes you need both at the party."
+  timing_refinement:
+    - "Even umbrellas get tired of pretending they’re strong."
+    - "Some puddles aren’t meant to be jumped, they’re meant to be stared into."
+notes:
+  - Humour is not escape—it is echo.
+  - Timing is civic: silence, pause, and undertone are part of the trace.
+  - Remix logic must balance levity with legacy.

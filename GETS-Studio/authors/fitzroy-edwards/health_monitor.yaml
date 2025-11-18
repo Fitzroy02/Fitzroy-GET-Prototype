@@ -1,0 +1,24 @@
+# Health Monitor Module Metadata
+---
+module: "health_monitor"
+status: "inactive"
+activation_conditions:
+  - author_opt_in: true
+  - civic_review_enabled: false
+tracking_fields:
+  - sleep_quality
+  - emotional_tone
+  - stress_level
+  - pause_frequency
+alert_logic:
+  doctor_alert:
+    enabled: false
+    threshold_conditions:
+      - sustained_grief: 3 scenarios
+      - sleep_decline: 3 consecutive nights
+      - dissociation_flag: true
+      - civic_priority_flag: "GP appointment recommended"
+consent_required: true
+privacy_mode: "author-controlled"
+usage_rights: "Declared by author"
+licence_status: "Original / Creative Commons / Permission granted"

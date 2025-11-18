@@ -1,0 +1,91 @@
+---
+manifest: john_t_hope_manifest
+author: Fitzroy Brian Edwards (John T. Hope)
+source: Revised copy of The Whistling Wind
+
+scenarios:
+  - scenario_01_morning_after_whistling_wind
+  - scenario_02_in_need_of_help
+  - scenario_03_trying_to_tell
+  - scenario_04_my_mind
+  - scenario_05_first_nights_raving
+  - scenario_06_the_bodys_role
+  - scenario_07_lessons_in_love
+  - scenario_08_am_i_well_or_not
+  - scenario_09_whats_happening
+  - scenario_10_dual_meaning
+
+badges:
+  - existential-appeal
+  - relational-friction
+  - perception-loop
+  - rhythmic-resistance
+  - embodied-warning
+  - relational-test
+  - logic-decree
+  - threshold-fracture
+  - symbolic-decree
+
+curriculum_hooks:
+  - civic transmission
+  - emotional truth
+  - relational ethics
+  - poetic resistance
+  - systemic neglect
+  - metaphysical assertion
+  - fear of authority
+  - naming and trauma
+
+gating_protocol:
+  studio_access: "Instant, no badge requirement"
+  medical_access:
+    gate_1: "2 badges — opens basic medical and paramedic support"
+    gate_2: "4 badges — grants intermediate care and mental health triage"
+    gate_3: "6 badges — unlocks full access to all levels of medical and paramedic care"
+
+gets_ports:
+  - 3000: studio interface
+  - 5432: badge database
+  - 8000: scenario preview
+  - 5000: civic echo server
+  - 22: SSH access (if remote rehearsal is needed)
+
+port_forwarding:
+  mode: hybrid
+  environments:
+    - docker
+    - wsl
+    - virtualbox
+    - native
+  manual_required_for:
+    - 5432
+    - 8000
+
+media_tools_access:
+  description: |
+    Visual artists and designers may contribute without earning badges. Uploads are welcomed for:
+      - Scenario illustrations
+      - Badge iconography
+      - Civic posters and covers
+      - Symbolic personae portraits (e.g. Carlota, Lumen, AXEL)
+    No badge gating applies to media tools. Upload is the only requirement.
+
+badge_logic:
+  description: |
+    Badges are earned through scenario rehearsal, emotional reflection, and civic engagement.
+    See manifest for full badge list and gating protocol.
+
+# — Port Forwarding Protocol
+# Document which ports require forwarding in each environment. See 'port_forwarding' section above for details.
+
+# — Scaffolded Content
+# This manifest and its linked resources were scaffolded to support GETS Studio onboarding, scenario rehearsal, badge logic, and civic curriculum integration.
+
+---
+
+For onboarding resources and a welcome scenario, see [onboarding/README.md](../onboarding/README.md)
+
+### 🚪 Onboarding Flow
+
+New contributors can begin here:  
+👉 [GETS Studio Onboarding](../onboarding/flow.md)

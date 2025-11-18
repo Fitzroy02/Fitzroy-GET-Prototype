@@ -1,0 +1,12 @@
+activation_ritual:
+  phase: viii
+  practitioner_id: triage_ethics_practitioner
+  steps:
+    - Read aloud the civic explainer: “Urgency is not always visible. Rhythm is not always scheduled. Ethics must be rehearsed.”
+    - Enable diary interface and encrypted trace access.
+    - Light symbolic interface beacon (digital or physical).
+    - Select first scenario: rash_vs_heart_priority
+    - Engage emotional tool: urgency_resonator
+    - Log activation trace and timestamp.
+    - Confirm practitioner pledge: “I honour rhythm, protect agency, and rehearse care with ethical attunement.”
+  status: complete

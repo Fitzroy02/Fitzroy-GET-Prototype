@@ -1,0 +1,12 @@
+deployment_trace:
+  badge_required: Practitioner Badge
+  trace_required: true
+  conditions:
+    - minimum 1 Phase VIII module completed
+    - institution or civic setting identified
+    - Covenant translated or referenced
+    - fallback logic included
+  permissions_granted:
+    - curriculum stewardship
+    - institutional deployment
+    - civic forum moderation

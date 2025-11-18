@@ -1,0 +1,12 @@
+# Manifest Template
+phase: [Phase]
+title: [Manifest Title]
+description: [Manifest description]
+modules: []
+scenarios: []
+badges: []
+status: draft
+multimedia_mapping:
+  - scenario_id: <Scenario ID>
+    film_reference: <URL to film asset>
+    playback_interface: <embedded | link-out | vimeo | youtube | github>
