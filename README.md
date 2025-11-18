@@ -1,4 +1,7 @@
 # ![Practitioner Seal](https://www.craiyon.com/media/images/UauUKF5uR32I9Z_0jQY7Uw.png)
+
+![Upload Flow v1.1](https://img.shields.io/badge/Upload_Flow-v1.1-blueviolet?style=flat-square)
+
 <div align="center">
 	<img src="https://www.craiyon.com/media/images/UauUKF5uR32I9Z_0jQY7Uw.png" alt="Practitioner Seal" width="300"/>
 	<br/>
