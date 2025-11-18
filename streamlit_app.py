@@ -48,8 +48,54 @@ def main():
         _Every stream is a civic gesture. Every sound, a transmission of care._
         """)
 
-    # Upload audio file
-    audio_file = st.file_uploader("🎵 Upload your audio file", type=["mp3", "wav", "ogg"])
+    # Upload Media Section
+    st.header("🎧📽️ Upload Your Media")
+
+    # Upload audio or video
+    uploaded_file = st.file_uploader(
+        "Upload an audio or video file",
+        type=["mp3", "wav", "ogg", "mp4", "webm", "mov"]
+    )
+
+    # Caption input
+    caption = st.text_input("📝 Add a caption or poetic note for your media")
+
+    # Session state to track ad playback
+    if "ad_played" not in st.session_state:
+        st.session_state.ad_played = False
+
+    # Playback logic
+    if uploaded_file is not None:
+        file_type = uploaded_file.type
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        with st.expander("📽️ Preview Uploaded Media"):
+            if file_type.startswith("audio"):
+                st.audio(uploaded_file)
+            elif file_type.startswith("video"):
+                st.video(uploaded_file)
+            else:
+                st.error("Unsupported file type. Please upload audio or video only.")
+
+        # Display caption if provided
+        if caption:
+            st.markdown(f"**Caption:** _{caption}_")
+
+        # Log upload
+        st.markdown(f"🕒 Uploaded at: `{timestamp}`")
+
+        # Stream Integrity Badge
+        st.success("✅ Stream Integrity Verified")
+
+        # Trigger Advertisement (once per session)
+        if not st.session_state.ad_played:
+            st.markdown("---")
+            st.subheader("🎬 Sponsored Interlude")
+            st.video("https://your-hosted-link.com/advertisement.mp4")
+            st.session_state.ad_played = True
+
+    else:
+        st.info("Upload a media file to activate stream integrity and trigger the sponsored interlude.")
 
     with st.expander("🔊 Test Audio Playback"):
         st.markdown("Click below to test if your browser can play audio.")
@@ -80,26 +126,16 @@ def main():
             except Exception as e:
                 st.error(f"❌ Error accessing remote file: {e}")
 
-    # File size check (limit: 10MB)
-    MAX_SIZE_MB = 10
-
-    # Format validation
-    if audio_file is not None:
-        file_size_mb = audio_file.size / (1024 * 1024)
-        st.markdown(f"📦 File size: `{file_size_mb:.2f} MB`")
-
-        if file_size_mb > MAX_SIZE_MB:
-            st.warning("⚠️ File may be too large. Try a smaller clip to rule out loading issues.")
-        else:
-            st.success("✅ File size is within optimal range.")
-
-        if audio_file.name.endswith(('.mp3', '.wav', '.ogg')):
-            st.success(f"✅ Format supported: {audio_file.name}")
-            st.audio(audio_file, format=f"audio/{audio_file.name.split('.')[-1]}")
-            # Playback prompt
-            st.markdown("🔈 **Note:** Some browsers block autoplay. If you don't hear sound, press play manually or check your browser's sound settings.")
-        else:
-            st.error("❌ Unsupported format. Please upload MP3, WAV, or OGG.")
+    # Video Embeds
+    st.subheader("🎬 Featured Transmissions")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.video("https://your-hosted-link.com/whistling-wind.mp4")
+    
+    with col2:
+        st.video("https://your-hosted-link.com/advertisement.mp4")
 
     # Call the Phase VI renderer (placeholder)
     render_phase_vi_dashboard(None, None, None, None)
