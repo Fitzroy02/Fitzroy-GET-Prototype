@@ -26,6 +26,54 @@ def main():
         ["Ethical Pause", "Civic Rehearsal", "Legacy Stewardship"],
     )
 
+    # The Whistling Wind Book Section
+    with st.expander("📖 The Whistling Wind — Full Book"):
+        st.markdown("### 📚 The Whistling Wind by John Thought Hope")
+        st.markdown("*A poetic transmission exploring rhythm, resonance, and civic breath.*")
+        
+        # Note: Add the_whistling_wind.pdf to your repository to enable download
+        # Uncomment when PDF is available:
+        # import os
+        # if os.path.exists("the_whistling_wind.pdf"):
+        #     with open("the_whistling_wind.pdf", "rb") as f:
+        #         st.download_button(
+        #             "📥 Download The Whistling Wind (PDF)",
+        #             f,
+        #             file_name="the_whistling_wind.pdf",
+        #             mime="application/pdf"
+        #         )
+        
+        st.info("Book preview coming soon. Upload the PDF to enable download and viewing.")
+
+    # Scenario-specific content
+    if scenario == "Ethical Pause":
+        st.markdown("#### 🌬️ Ethical Pause")
+        st.markdown("""
+        *A moment to breathe, reflect, and attune.*
+        
+        In this scenario, practitioners pause before action—allowing space for emotional 
+        resonance and ethical consideration. The Whistling Wind invites contemplation 
+        before transmission.
+        """)
+    elif scenario == "Civic Rehearsal":
+        st.markdown("#### 🎭 Civic Rehearsal")
+        st.markdown("""
+        *Practice the gestures of care before they're needed.*
+        
+        This scenario enables practitioners to rehearse civic responses, test emotional 
+        tones, and refine their transmissions. Each rehearsal strengthens the muscle 
+        of collective care.
+        """)
+    elif scenario == "Legacy Stewardship":
+        st.markdown("#### 🕊️ Legacy Stewardship")
+        st.markdown("""
+        *Tend the archive. Honor the lineage. Pass it forward.*
+        
+        In this mode, practitioners become stewards of transmissions—archiving wisdom, 
+        annotating echoes, and ensuring that each gesture carries forward with integrity 
+        and resonance.
+        """)
+
     # DJ Stream Integrity Helper
     with st.expander("🎧 DJ Stream Integrity – Audio Troubleshooting"):
         st.markdown("""
