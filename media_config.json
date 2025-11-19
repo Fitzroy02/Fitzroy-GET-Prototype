@@ -1,0 +1,16 @@
+{
+  "intro": {
+    "video": "media/ww_intro_clip.mp4",
+    "text": "media/ww_intro_text.txt"
+  },
+  "ad": {
+    "video": "media/ww_ad_clip.mp4",
+    "text": "media/ww_ad_text.txt"
+  },
+  "loop": {
+    "audio": "media/ww_loop_audio.wav"
+  },
+  "cover": {
+    "image": "media/ww_cover_image.jpg"
+  }
+}

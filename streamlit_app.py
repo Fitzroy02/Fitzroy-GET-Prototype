@@ -1,9 +1,17 @@
 import streamlit as st
+st.write("Checkpoint 1: App started")
 import os
 import requests
 from datetime import datetime
 import base64
 import json
+import logging
+import pandas as pd
+st.write("Checkpoint 2: Pandas imported")
+import numpy as np
+st.write("Checkpoint 3: Numpy imported")
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def get_license_badge(license_type):
@@ -26,6 +34,8 @@ def main():
     st.set_page_config(page_title="GETS Studio V-1.6", layout="wide")
     st.title("GETS Studio V-1.6")
     st.subheader("A Civic Rehearsal Portal for Artists, Educators, and Ethical Thought Practitioners")
+    
+    st.write("Rebuild triggered")
 
     # Initialize license registry in session state
     if "license_registry" not in st.session_state:
@@ -352,29 +362,47 @@ def main():
     # Video Embeds
     st.subheader("🎬 Featured Transmissions")
     
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("**🌬️ The Whistling Wind (Intro)**")
-        st.markdown("""
-        <iframe width="100%" height="315"
-          src="https://www.youtube.com/embed/QYYvgFzR8Qc"
-          title="The Whistling Wind Intro"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("**📢 The Whistling Wind (Ad)**")
-        st.markdown("""
-        <iframe width="100%" height="315"
-          src="https://www.youtube.com/embed/YTp7UQNE0Dw"
-          title="The Whistling Wind Ad"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-        """, unsafe_allow_html=True)
+    # Load media manifest
+    if os.path.exists("media_config.json"):
+        with open("media_config.json") as f:
+            manifest = json.load(f)
+        
+        # UI: Select transmission type
+        choice = st.radio("Choose your transmission:", ["Intro", "Ad", "Loop"])
+        
+        # Cue ritual
+        if st.button("Begin Transmission"):
+            if choice == "Intro":
+                st.video(manifest["intro"]["video"])
+                if os.path.exists(manifest["intro"]["text"]):
+                    with open(manifest["intro"]["text"]) as f:
+                        st.markdown(f.read())
+            elif choice == "Ad":
+                st.video(manifest["ad"]["video"])
+                if os.path.exists(manifest["ad"]["text"]):
+                    with open(manifest["ad"]["text"]) as f:
+                        st.markdown(f.read())
+            elif choice == "Loop":
+                if os.path.exists(manifest["loop"]["audio"]):
+                    st.audio(manifest["loop"]["audio"])
+                    st.markdown("Ambient loop playing. Let the wind speak.")
+        
+        # Optional: Display cover image
+        if os.path.exists(manifest["cover"]["image"]):
+            st.image(manifest["cover"]["image"], caption="Whistling Wind Cover", use_column_width=True)
+    else:
+        # Fallback to original layout
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("**🌬️ The Whistling Wind (Intro)**")
+            st.video("media/ww_intro_clip.mp4")
+            if os.path.exists("media/ww_intro_text.txt"):
+                st.markdown(open("media/ww_intro_text.txt").read())
+        
+        with col2:
+            st.markdown("**📢 The Whistling Wind (Ad)**")
+            st.video(os.path.join("media", "ww_ad_clip.mp4"))
 
     # Call the Phase VI renderer (placeholder)
     render_phase_vi_dashboard(None, None, None, None)
