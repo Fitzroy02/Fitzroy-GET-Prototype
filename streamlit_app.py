@@ -1,5 +1,4 @@
 import streamlit as st
-st.write("Checkpoint 1: App started")
 import os
 import requests
 from datetime import datetime
@@ -7,9 +6,7 @@ import base64
 import json
 import logging
 import pandas as pd
-st.write("Checkpoint 2: Pandas imported")
 import numpy as np
-st.write("Checkpoint 3: Numpy imported")
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -34,8 +31,6 @@ def main():
     st.set_page_config(page_title="GETS Studio V-1.6", layout="wide")
     st.title("GETS Studio V-1.6")
     st.subheader("A Civic Rehearsal Portal for Artists, Educators, and Ethical Thought Practitioners")
-    
-    st.write("Rebuild triggered")
 
     # Initialize license registry in session state
     if "license_registry" not in st.session_state:
