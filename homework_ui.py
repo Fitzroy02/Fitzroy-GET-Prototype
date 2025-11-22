@@ -10,13 +10,13 @@ def submit_homework(session_id, student_id):
     st.markdown(
         """
         ### 📜 Consent Notice
-        By submitting your homework, you consent to storage and review under the 
-        [Platform Policy](./POLICY.md).  
-        - Submissions are private between you and your practitioner.  
-        - Files will be retained for **30 days** and then deleted automatically.  
-        - Feedback will be stored securely and visible only to you.  
-        
-        See [Student & Patient Information](./STUDENT_INFO.md) for details.
+        By submitting your homework, you agree to the [Student & Patient Information](./STUDENT_INFO.md).
+
+        - Your submission is private between you and your practitioner/teacher.
+        - Homework files are retained for **30 days** and then deleted automatically.
+        - Feedback is stored securely and visible only to you.
+        - Audit logs are retained for **90 days**; session archives for **180 days**.
+        - You have the right to ask questions about privacy and retention at any time.
         """
     )
 
