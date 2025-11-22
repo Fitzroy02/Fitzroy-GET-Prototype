@@ -6,19 +6,28 @@ def main():
     st.title("🎓 Practitioner–Student Collaboration Platform")
 
     # Intro video
+    st.subheader("📺 Platform Introduction")
     st.markdown(
-        """
-        <iframe width="560" height="315"
-        src="https://www.youtube.com/embed/QYYvgFzR8Qc"
-        frameborder="0" allowfullscreen></iframe>
-        """,
-        unsafe_allow_html=True
+        "*This short video introduces the platform, explaining consent, retention, and session flow.*"
     )
+    st.video("https://www.youtube.com/watch?v=QYYvgFzR8Qc")
+
+    # Acknowledgment gate
+    watched_intro = st.checkbox("I've watched the introduction")
+
+    if watched_intro:
+        st.subheader("🎶 Whistling Ad")
+        st.markdown(
+            "*A creative whistling ad that sets the tone for learning and collaboration, shown after the intro.*"
+        )
+        st.video("https://www.youtube.com/watch?v=YTp7UQNE0Dw")
+    else:
+        st.info("Please watch the introduction first to continue.")
 
     # Load sessions data
     sessions = load_json("sessions.json")
 
-    # Simple role selector for demo purposes
+    # Role selector follows after videos
     role = st.sidebar.selectbox("Select role", ["student", "practitioner"])
     user_id = st.sidebar.text_input("User ID", "user-001")
 
