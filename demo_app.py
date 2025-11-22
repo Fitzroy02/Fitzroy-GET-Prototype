@@ -5,13 +5,24 @@ from storage import load_json, save_json
 def main():
     st.title("🎓 Practitioner–Student Collaboration Platform")
 
-    # Welcome banner
+    # Welcome banner with background style
     st.markdown(
         """
-        ## 👋 Welcome!
-        Please enjoy these two short clips before you begin exploring the platform.
+        <div style="
+            background-color:#e6f7ff;
+            border:2px solid #2E86AB;
+            border-radius:10px;
+            padding:15px;
+            margin-bottom:20px;
+        ">
+        <h2 style="color:#2E86AB;">👋 Welcome!</h2>
+        <p style="font-size:16px; color:#333;">
+        Please enjoy these two short clips before you begin exploring the platform.<br>
         They set the tone for collaboration and explain how consent and retention work.
-        """
+        </p>
+        </div>
+        """,
+        unsafe_allow_html=True
     )
 
     # Whistling ad (first welcome video)
