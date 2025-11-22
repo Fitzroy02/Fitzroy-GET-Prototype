@@ -5,6 +5,7 @@ Validates the filesystem against config/genres.json and creates missing folders 
 """
 
 import os
+import sys
 import json
 import argparse
 
@@ -18,10 +19,10 @@ def load_genres():
             return json.load(f)
     except FileNotFoundError:
         print(f"Error: Config file not found at {CONFIG_PATH}")
-        exit(1)
+        sys.exit(1)
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in config file: {e}")
-        exit(1)
+        sys.exit(1)
 
 def safe_name(name):
     """Convert genre/subgenre names into lowercase, underscore-safe folder names."""
@@ -41,6 +42,9 @@ def ensure_folder(path, dry_run=False, verbose=False):
 
 def sync_structure(dry_run=False, verbose=False):
     data = load_genres()
+    if "genres" not in data:
+        print("Error: 'genres' key not found in config file")
+        sys.exit(1)
     for genre in data["genres"]:
         genre_folder = os.path.join(BASE_DIR, safe_name(genre["name"]))
         ensure_folder(genre_folder, dry_run, verbose)
