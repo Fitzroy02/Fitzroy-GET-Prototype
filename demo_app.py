@@ -5,14 +5,23 @@ from storage import load_json, save_json
 def main():
     st.title("🎓 Practitioner–Student Collaboration Platform")
 
-    # Whistling ad (must be viewed first)
+    # Welcome banner
+    st.markdown(
+        """
+        ## 👋 Welcome!
+        Please enjoy these two short clips before you begin exploring the platform.
+        They set the tone for collaboration and explain how consent and retention work.
+        """
+    )
+
+    # Whistling ad (first welcome video)
     st.subheader("🎶 Whistling Ad")
     st.markdown(
         "*A creative whistling ad that sets the tone for learning and collaboration.*"
     )
     st.video("https://www.youtube.com/watch?v=YTp7UQNE0Dw")
 
-    # Intro video (second, after the ad)
+    # Intro video (second welcome video)
     st.subheader("📺 Platform Introduction")
     st.markdown(
         "*This short video introduces the platform, explaining consent, retention, and session flow.*"
@@ -22,7 +31,7 @@ def main():
     # Load sessions data
     sessions = load_json("sessions.json")
 
-    # Role selector follows after videos
+    # Role selector follows after welcome videos
     role = st.sidebar.selectbox("Select role", ["student", "practitioner"])
     user_id = st.sidebar.text_input("User ID", "user-001")
 
