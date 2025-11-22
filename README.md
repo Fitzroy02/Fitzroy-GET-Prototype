@@ -17,6 +17,19 @@ streamlit run streamlit_app.py
 
 ---
 
+## 🎥 Intro Video
+
+We've prepared a short introduction to the Practitioner–Student Collaboration Platform.
+
+- Watch on YouTube: [Intro Clip](https://www.youtube.com/watch?v=QYYvgFzR8Qc)
+- This video explains the purpose of the consent banner, retention policies, and how sessions work.
+
+### 📚 Where it appears
+- Embedded directly in the app (`demo_app.py`) so students and practitioners see it on login.
+- Linked here for collaborators who want to preview without running the app.
+
+---
+
 ## 🎙️ Featured Transmission: The Whistling Wind Series
 
 This Streamlit app now supports full YouTube integration, enabling playback across all platforms.
