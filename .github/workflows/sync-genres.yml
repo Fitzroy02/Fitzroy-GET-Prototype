@@ -1,0 +1,37 @@
+name: Validate Genre Structure
+
+on:
+  pull_request:
+    paths:
+      - 'platform-library/**'
+      - '.github/workflows/sync-genres.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'platform-library/**'
+      - '.github/workflows/sync-genres.yml'
+
+jobs:
+  validate-structure:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      
+      - name: Validate genre structure (dry-run)
+        run: |
+          python3 platform-library/tools/sync_genres.py --dry-run --verbose
+      
+      - name: Check for missing folders
+        run: |
+          echo "Validation complete. This workflow runs in dry-run mode."
+          echo "To apply changes locally, run: python3 platform-library/tools/sync_genres.py"
