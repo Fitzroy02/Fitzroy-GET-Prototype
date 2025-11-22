@@ -1,21 +1,19 @@
-# ![Practitioner Seal](https://www.craiyon.com/media/images/UauUKF5uR32I9Z_0jQY7Uw.png)
+# 🎓 Practitioner–Student Collaboration Platform
 
-![Upload Flow v1.1](https://img.shields.io/badge/Upload_Flow-v1.1-blueviolet?style=flat-square)
-
-<div align="center">
-	<img src="https://www.craiyon.com/media/images/UauUKF5uR32I9Z_0jQY7Uw.png" alt="Practitioner Seal" width="300"/>
-	<br/>
-	<em>Practitioner Seal — Phase: Crayon. Source: Craiyon.</em>
-</div>
+This platform supports practitioner–student collaboration with sessions, homework spaces, and transparent governance.
 
 ---
 
-**Echo Lines:**
-> GETS VI is now public. The seal is activated. Echo field initialized.
+## 🚀 Getting Started
 
-**Badge Status:** Echo
+### Requirements
+- Python 3.9+
+- [Streamlit](https://streamlit.io/) installed (`pip install streamlit`)
 
-**Mood Scale:** Resonant
+### Run the app
+```bash
+streamlit run streamlit_app.py
+```
 
 ---
 
