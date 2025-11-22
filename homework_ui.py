@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime
+import storage  # type: ignore
 from storage import save_json, load_json
 
 def submit_homework(session_id, student_id):
