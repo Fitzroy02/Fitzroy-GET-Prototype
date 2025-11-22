@@ -1,3 +1,11 @@
+# 📄 Pull Request Template
+
+## 📝 Summary
+<!-- Provide a clear summary of the changes introduced in this PR -->
+
+## 🎯 Rationale
+<!-- Explain why these changes are necessary and what problem they solve -->
+
 ## ✅ Governance Review Checklist
 
 | Area                  | Reviewer Notes | Status |
@@ -10,3 +18,16 @@
 | **README Link** – Does README point to POLICY.md for collaborators? |                | ☐ |
 | **CODEOWNERS** – Are required reviewers assigned for POLICY.md changes? |                | ☐ |
 | **Compliance** – Does the update align with civic/ethical standards? |                | ☐ |
+
+## 📋 Checklist
+- [ ] Render and verify Markdown files on GitHub
+- [ ] Confirm consent banner displays correctly in homework submission UI
+- [ ] Add README link to POLICY.md if missing
+- [ ] Assign reviewers (privacy and practitioner leads)
+- [ ] If approved, merge into `main`
+
+## 👥 Reviewers
+<!-- Replace with actual GitHub handles -->
+- @<maintainer1>
+- @<privacy-officer>
+- @<practitioner-lead>
