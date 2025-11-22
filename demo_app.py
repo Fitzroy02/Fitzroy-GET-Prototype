@@ -5,24 +5,19 @@ from storage import load_json, save_json
 def main():
     st.title("🎓 Practitioner–Student Collaboration Platform")
 
-    # Intro video
+    # Whistling ad (must be viewed first)
+    st.subheader("🎶 Whistling Ad")
+    st.markdown(
+        "*A creative whistling ad that sets the tone for learning and collaboration.*"
+    )
+    st.video("https://www.youtube.com/watch?v=YTp7UQNE0Dw")
+
+    # Intro video (second, after the ad)
     st.subheader("📺 Platform Introduction")
     st.markdown(
         "*This short video introduces the platform, explaining consent, retention, and session flow.*"
     )
     st.video("https://www.youtube.com/watch?v=QYYvgFzR8Qc")
-
-    # Acknowledgment gate
-    watched_intro = st.checkbox("I've watched the introduction")
-
-    if watched_intro:
-        st.subheader("🎶 Whistling Ad")
-        st.markdown(
-            "*A creative whistling ad that sets the tone for learning and collaboration, shown after the intro.*"
-        )
-        st.video("https://www.youtube.com/watch?v=YTp7UQNE0Dw")
-    else:
-        st.info("Please watch the introduction first to continue.")
 
     # Load sessions data
     sessions = load_json("sessions.json")
