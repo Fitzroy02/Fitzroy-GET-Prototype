@@ -15,6 +15,8 @@ def submit_homework(session_id, student_id):
         - Submissions are private between you and your practitioner.  
         - Files will be retained for **30 days** and then deleted automatically.  
         - Feedback will be stored securely and visible only to you.  
+        
+        See [Student & Patient Information](./STUDENT_INFO.md) for details.
         """
     )
 
