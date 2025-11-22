@@ -13,8 +13,15 @@ CONFIG_PATH = "platform-library/config/genres.json"
 BASE_DIR = "platform-library"
 
 def load_genres():
-    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print(f"Error: Config file not found at {CONFIG_PATH}")
+        exit(1)
+    except json.JSONDecodeError as e:
+        print(f"Error: Invalid JSON in config file: {e}")
+        exit(1)
 
 def safe_name(name):
     """Convert genre/subgenre names into lowercase, underscore-safe folder names."""
