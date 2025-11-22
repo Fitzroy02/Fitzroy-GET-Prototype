@@ -5,6 +5,16 @@ from storage import load_json, save_json
 def main():
     st.title("🎓 Practitioner–Student Collaboration Platform")
 
+    # Intro video
+    st.markdown(
+        """
+        <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/QYYvgFzR8Qc"
+        frameborder="0" allowfullscreen></iframe>
+        """,
+        unsafe_allow_html=True
+    )
+
     # Load sessions data
     sessions = load_json("sessions.json")
 
@@ -37,16 +47,19 @@ def main():
     # Footer message for transparency
     st.markdown(
         """
-        ---
-        #### 📜 Consent Reminder
-        By using this platform, you agree to the [Student & Patient Information](./STUDENT_INFO.md).
-        
-        - Homework submissions are private between you and your practitioner/teacher.  
-        - Files are retained for **30 days** and then deleted automatically.  
-        - Feedback is stored securely and visible only to you.  
-        - Audit logs are retained for **90 days**; session archives for **180 days**.  
-        - You have the right to ask questions about privacy and retention at any time.  
-        """
+        <div style="
+            background-color:#fafafa;
+            border-top:1px solid #dddddd;
+            padding:10px;
+            margin-top:30px;
+            font-size:12px;
+            color:#555;
+        ">
+        📜 Consent Reminder: By using this platform, you agree to the 
+        <a href='./STUDENT_INFO.md'>Student & Patient Information</a>.
+        </div>
+        """,
+        unsafe_allow_html=True
     )
 
 if __name__ == "__main__":

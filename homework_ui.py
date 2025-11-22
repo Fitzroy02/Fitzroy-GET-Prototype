@@ -9,15 +9,26 @@ def submit_homework(session_id, student_id):
     # Consent banner
     st.markdown(
         """
-        ### 📜 Consent Notice
-        By submitting your homework, you agree to the [Student & Patient Information](./STUDENT_INFO.md).
-
-        - Your submission is private between you and your practitioner/teacher.
-        - Homework files are retained for **30 days** and then deleted automatically.
-        - Feedback is stored securely and visible only to you.
-        - Audit logs are retained for **90 days**; session archives for **180 days**.
-        - You have the right to ask questions about privacy and retention at any time.
-        """
+        <div style="
+            background-color:#f0f8ff;
+            border:1px solid #cccccc;
+            border-radius:8px;
+            padding:15px;
+            margin-top:10px;
+            margin-bottom:20px;
+        ">
+        <h3>📜 Consent Notice</h3>
+        <p>By submitting your homework, you agree to the 
+        <a href='./STUDENT_INFO.md'>Student & Patient Information</a>.</p>
+        <ul>
+          <li>Private between you and your practitioner/teacher</li>
+          <li>Retained for <b>30 days</b>, then deleted</li>
+          <li>Feedback stored securely, visible only to you</li>
+          <li>Audit logs kept for <b>90 days</b>; session archives for <b>180 days</b></li>
+        </ul>
+        </div>
+        """,
+        unsafe_allow_html=True
     )
 
     sessions = load_json("sessions.json")
