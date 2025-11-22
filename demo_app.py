@@ -34,5 +34,20 @@ def main():
             save_json("sessions.json", sessions)
             st.success(f"Session '{new_title}' created!")
 
+    # Footer message for transparency
+    st.markdown(
+        """
+        ---
+        #### 📜 Consent Reminder
+        By using this platform, you agree to the [Student & Patient Information](./STUDENT_INFO.md).
+        
+        - Homework submissions are private between you and your practitioner/teacher.  
+        - Files are retained for **30 days** and then deleted automatically.  
+        - Feedback is stored securely and visible only to you.  
+        - Audit logs are retained for **90 days**; session archives for **180 days**.  
+        - You have the right to ask questions about privacy and retention at any time.  
+        """
+    )
+
 if __name__ == "__main__":
     main()
