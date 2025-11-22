@@ -68,19 +68,21 @@ def main():
             save_json("sessions.json", sessions)
             st.success(f"Session '{new_title}' created!")
 
-    # Footer message for transparency
+    # Footer message for transparency and consistency
     st.markdown(
         """
         <div style="
             background-color:#fafafa;
-            border-top:1px solid #dddddd;
-            padding:10px;
-            margin-top:30px;
-            font-size:12px;
+            border-top:2px solid #2E86AB;
+            border-radius:0 0 10px 10px;
+            padding:12px;
+            margin-top:40px;
+            font-size:13px;
             color:#555;
+            text-align:center;
         ">
         📜 Consent Reminder: By using this platform, you agree to the 
-        <a href='./STUDENT_INFO.md'>Student & Patient Information</a>.
+        <a href='./STUDENT_INFO.md' style="color:#2E86AB; text-decoration:none;">Student & Patient Information</a>.
         </div>
         """,
         unsafe_allow_html=True
