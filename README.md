@@ -17,11 +17,15 @@ streamlit run streamlit_app.py
 
 ---
 
-## 🎥 Videos
+## 🎥 Welcome Videos
+
+When you open the app, you'll be greeted by two short videos:
+
+- [Whistling Ad](https://www.youtube.com/watch?v=YTp7UQNE0Dw)  
+  *Sets the tone for collaboration and creativity.*
+
 - [Intro Clip](https://www.youtube.com/watch?v=QYYvgFzR8Qc)  
   *Introduces the platform, consent, and retention policies.*
-- [Whistling Ad](https://www.youtube.com/watch?v=YTp7UQNE0Dw)  
-  *Sets the tone for collaboration after the intro.*
 
 ---
 
