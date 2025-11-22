@@ -1,0 +1,49 @@
+{
+  "genres": [
+    {
+      "name": "Fiction",
+      "subgenres": [
+        "Science Fiction",
+        "Fantasy",
+        "Mystery",
+        "Thriller",
+        "Romance",
+        "Historical Fiction",
+        "Literary Fiction"
+      ]
+    },
+    {
+      "name": "Non-Fiction",
+      "subgenres": [
+        "Biography",
+        "Memoir",
+        "History",
+        "Science",
+        "Philosophy",
+        "Self-Help",
+        "Business"
+      ]
+    },
+    {
+      "name": "Poetry",
+      "subgenres": [
+        "Epic",
+        "Lyric",
+        "Narrative",
+        "Free Verse",
+        "Haiku"
+      ]
+    }
+  ],
+  "crossTags": [
+    {
+      "name": "Coming of Age"
+    },
+    {
+      "name": "Dystopian"
+    },
+    {
+      "name": "Experimental"
+    }
+  ]
+}
