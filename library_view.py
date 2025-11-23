@@ -4,6 +4,52 @@ Library View Module - User's Personal Content Library
 import streamlit as st
 import sqlite3
 from datetime import datetime
+import re
+
+
+def convert_youtube_url(url):
+    """Convert YouTube watch URL to embed URL for better compatibility"""
+    if "youtube.com/watch" in url:
+        match = re.search(r'v=([a-zA-Z0-9_-]+)', url)
+        if match:
+            video_id = match.group(1)
+            return f"https://www.youtube.com/embed/{video_id}"
+    elif "youtu.be/" in url:
+        match = re.search(r'youtu\.be/([a-zA-Z0-9_-]+)', url)
+        if match:
+            video_id = match.group(1)
+            return f"https://www.youtube.com/embed/{video_id}"
+    return url
+
+
+def load_video(path):
+    """Load video from local file or URL with proper handling"""
+    if path.startswith("http://") or path.startswith("https://"):
+        return convert_youtube_url(path)
+    try:
+        with open(path, "rb") as f:
+            return f.read()
+    except FileNotFoundError:
+        st.error(f"Video file not found: {path}")
+        return None
+    except Exception as e:
+        st.warning(f"Could not load video file: {e}")
+        return path
+
+
+def load_audio(path):
+    """Load audio from local file or URL with proper handling"""
+    if path.startswith("http://") or path.startswith("https://"):
+        return path
+    try:
+        with open(path, "rb") as f:
+            return f.read()
+    except FileNotFoundError:
+        st.error(f"Audio file not found: {path}")
+        return None
+    except Exception as e:
+        st.warning(f"Could not load audio file: {e}")
+        return path
 
 
 def library_view(user_id, role):
@@ -192,21 +238,13 @@ def display_library_item_list(item, user_id, role, conn):
         if st.session_state.get(f"playing_{item_id}") or st.session_state.get(f"reading_{item_id}"):
             st.markdown("---")
             if content_type == "video" or content_type == "movie":
-                try:
-                    with open(path, "rb") as f:
-                        st.video(f.read())
-                except FileNotFoundError:
-                    st.error(f"Video file not found: {path}")
-                except Exception:
-                    st.video(path)  # Fallback to URL
+                video_data = load_video(path)
+                if video_data:
+                    st.video(video_data)
             elif content_type == "audio":
-                try:
-                    with open(path, "rb") as f:
-                        st.audio(f.read())
-                except FileNotFoundError:
-                    st.error(f"Audio file not found: {path}")
-                except Exception:
-                    st.audio(path)  # Fallback to URL
+                audio_data = load_audio(path)
+                if audio_data:
+                    st.audio(audio_data)
             else:
                 st.markdown(f"**{title}**")
                 st.markdown(f"*{description or 'No description available'}*")
@@ -298,21 +336,13 @@ def display_library_item_grid(item, user_id, role, conn):
         if st.session_state.get(f"grid_playing_{item_id}") or st.session_state.get(f"grid_reading_{item_id}"):
             with st.expander(f"▶ {title}", expanded=True):
                 if content_type == "video" or content_type == "movie":
-                    try:
-                        with open(path, "rb") as f:
-                            st.video(f.read())
-                    except FileNotFoundError:
-                        st.error(f"Video file not found: {path}")
-                    except Exception:
-                        st.video(path)  # Fallback to URL
+                    video_data = load_video(path)
+                    if video_data:
+                        st.video(video_data)
                 elif content_type == "audio":
-                    try:
-                        with open(path, "rb") as f:
-                            st.audio(f.read())
-                    except FileNotFoundError:
-                        st.error(f"Audio file not found: {path}")
-                    except Exception:
-                        st.audio(path)  # Fallback to URL
+                    audio_data = load_audio(path)
+                    if audio_data:
+                        st.audio(audio_data)
                 else:
                     st.markdown(description or "No description")
                     try:

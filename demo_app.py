@@ -6,6 +6,41 @@ from library_view import library_view
 from auth_ui import login_register_window, check_authentication, get_current_user, logout
 import sqlite3
 from datetime import datetime
+import re
+
+def convert_youtube_url(url):
+    """Convert YouTube watch URL to embed URL for better compatibility"""
+    if "youtube.com/watch" in url:
+        # Extract video ID from watch URL
+        match = re.search(r'v=([a-zA-Z0-9_-]+)', url)
+        if match:
+            video_id = match.group(1)
+            return f"https://www.youtube.com/embed/{video_id}"
+    elif "youtu.be/" in url:
+        # Extract video ID from short URL
+        match = re.search(r'youtu\.be/([a-zA-Z0-9_-]+)', url)
+        if match:
+            video_id = match.group(1)
+            return f"https://www.youtube.com/embed/{video_id}"
+    return url
+
+def load_video(path):
+    """Load video from local file or URL with proper handling"""
+    # Check if it's a URL
+    if path.startswith("http://") or path.startswith("https://"):
+        # Convert YouTube URLs to embed format
+        return convert_youtube_url(path)
+    
+    # Try to load local file
+    try:
+        with open(path, "rb") as f:
+            return f.read()
+    except FileNotFoundError:
+        st.error(f"Video file not found: {path}")
+        return None
+    except Exception as e:
+        st.warning(f"Could not load video file: {e}")
+        return path  # Fallback to path
 
 def init_onboarding_db():
     """Initialize onboarding video tracking database"""
@@ -204,7 +239,9 @@ def main():
     )
     
     if selected_video:
-        st.video(selected_video["url"])
+        video_data = load_video(selected_video["url"])
+        if video_data:
+            st.video(video_data)
         
         col1, col2 = st.columns(2)
         if col1.button(f"Mark Viewed", key=f"{selected_video['key']}_viewed"):
@@ -309,14 +346,9 @@ def main():
                 if ctype == "book":
                     st.download_button("Download Book", data="(placeholder)", file_name=title+".pdf", key=f"download_{item_id}")
                 elif ctype in ["video", "movie"]:
-                    try:
-                        with open(path, "rb") as f:
-                            st.video(f.read())
-                    except FileNotFoundError:
-                        st.error(f"Video file not found: {path}")
-                    except Exception as e:
-                        st.warning(f"Using URL fallback: {path}")
-                        st.video(path)
+                    video_data = load_video(path)
+                    if video_data:
+                        st.video(video_data)
                 
                 # 🔖 Clickable tags
                 tag_list = [t.strip() for t in tags.split(",")]
