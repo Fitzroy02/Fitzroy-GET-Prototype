@@ -2,6 +2,7 @@ import streamlit as st
 from homework_ui import submit_homework
 from storage import load_json, save_json
 from upload_ui import upload_interface, update_content_schema
+from library_view import library_view
 import sqlite3
 from datetime import datetime
 
@@ -126,10 +127,38 @@ def main():
 
     # Load sessions data
     sessions = load_json("sessions.json")
+    
+    # Page routing based on sidebar navigation
+    if page == "📚 My Library":
+        library_view(user_id, role)
+        conn.close()
+        content_conn.close()
+        return
+    elif page == "📤 Upload (Practitioner)":
+        if role != "practitioner":
+            st.warning("⚠️ Switch to Practitioner role to access upload features")
+        else:
+            upload_interface(user_id, role)
+        conn.close()
+        content_conn.close()
+        return
+    elif page == "🔍 Search":
+        st.markdown("---")
+        # Jump to search section (handled below)
+    # else: page == "🏠 Home" - continue with normal flow
 
     # Role selector follows after welcome videos
     role = st.sidebar.selectbox("Select role", ["student", "practitioner"])
     user_id = st.sidebar.text_input("User ID", "user-001")
+    
+    # Sidebar navigation
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### 🧭 Navigation")
+    page = st.sidebar.radio(
+        "Go to:",
+        ["🏠 Home", "📚 My Library", "🔍 Search", "📤 Upload (Practitioner)"],
+        key="page_nav"
+    )
     
     # Calculate and display video completion progress
     cursor.execute("SELECT video_key, status FROM viewed_flags WHERE user=?", (user_id,))
