@@ -1,6 +1,7 @@
 import streamlit as st
 from homework_ui import submit_homework
 from storage import load_json, save_json
+from upload_ui import upload_interface, update_content_schema
 import sqlite3
 from datetime import datetime
 
@@ -42,6 +43,9 @@ def main():
     
     # Initialize content index database
     content_conn, content_cursor = init_content_db()
+    
+    # Update schema to support upload features
+    update_content_schema()
     
     # Inject global CSS styles
     st.markdown(
@@ -271,6 +275,10 @@ def main():
             submit_homework(session_id, user_id)
 
     elif role == "practitioner":
+        # Show upload interface for practitioners
+        upload_interface(user_id, role)
+        
+        st.markdown("---")
         st.header("Practitioner Dashboard")
         st.write("Here you can manage sessions, privacy, and retention policies.")
         # Example: create a new session
