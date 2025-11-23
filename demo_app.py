@@ -309,7 +309,14 @@ def main():
                 if ctype == "book":
                     st.download_button("Download Book", data="(placeholder)", file_name=title+".pdf", key=f"download_{item_id}")
                 elif ctype in ["video", "movie"]:
-                    st.video(path)
+                    try:
+                        with open(path, "rb") as f:
+                            st.video(f.read())
+                    except FileNotFoundError:
+                        st.error(f"Video file not found: {path}")
+                    except Exception as e:
+                        st.warning(f"Using URL fallback: {path}")
+                        st.video(path)
                 
                 # 🔖 Clickable tags
                 tag_list = [t.strip() for t in tags.split(",")]

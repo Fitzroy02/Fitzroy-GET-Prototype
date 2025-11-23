@@ -192,9 +192,21 @@ def display_library_item_list(item, user_id, role, conn):
         if st.session_state.get(f"playing_{item_id}") or st.session_state.get(f"reading_{item_id}"):
             st.markdown("---")
             if content_type == "video" or content_type == "movie":
-                st.video(path)
+                try:
+                    with open(path, "rb") as f:
+                        st.video(f.read())
+                except FileNotFoundError:
+                    st.error(f"Video file not found: {path}")
+                except Exception:
+                    st.video(path)  # Fallback to URL
             elif content_type == "audio":
-                st.audio(path)
+                try:
+                    with open(path, "rb") as f:
+                        st.audio(f.read())
+                except FileNotFoundError:
+                    st.error(f"Audio file not found: {path}")
+                except Exception:
+                    st.audio(path)  # Fallback to URL
             else:
                 st.markdown(f"**{title}**")
                 st.markdown(f"*{description or 'No description available'}*")
@@ -286,9 +298,21 @@ def display_library_item_grid(item, user_id, role, conn):
         if st.session_state.get(f"grid_playing_{item_id}") or st.session_state.get(f"grid_reading_{item_id}"):
             with st.expander(f"▶ {title}", expanded=True):
                 if content_type == "video" or content_type == "movie":
-                    st.video(path)
+                    try:
+                        with open(path, "rb") as f:
+                            st.video(f.read())
+                    except FileNotFoundError:
+                        st.error(f"Video file not found: {path}")
+                    except Exception:
+                        st.video(path)  # Fallback to URL
                 elif content_type == "audio":
-                    st.audio(path)
+                    try:
+                        with open(path, "rb") as f:
+                            st.audio(f.read())
+                    except FileNotFoundError:
+                        st.error(f"Audio file not found: {path}")
+                    except Exception:
+                        st.audio(path)  # Fallback to URL
                 else:
                     st.markdown(description or "No description")
                     try:
