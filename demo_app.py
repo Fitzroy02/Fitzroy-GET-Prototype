@@ -3,6 +3,7 @@ from homework_ui import submit_homework
 from storage import load_json, save_json
 from upload_ui import upload_interface, update_content_schema
 from library_view import library_view
+from auth_ui import login_register_window, check_authentication, get_current_user, logout
 import sqlite3
 from datetime import datetime
 
@@ -39,6 +40,16 @@ def init_content_db():
     return conn, c
 
 def main():
+    # Check authentication first
+    if not check_authentication():
+        login_register_window()
+        return
+    
+    # Get current user
+    user = get_current_user()
+    user_id = user['user_id']
+    role = user['role']
+    
     # Initialize video tracking database
     conn, cursor = init_onboarding_db()
     
@@ -128,9 +139,19 @@ def main():
     # Load sessions data
     sessions = load_json("sessions.json")
     
-    # Role selector and sidebar navigation (must be defined first)
-    role = st.sidebar.selectbox("Select role", ["student", "practitioner"])
-    user_id = st.sidebar.text_input("User ID", "user-001")
+    # Display user info in sidebar
+    st.sidebar.markdown("### 👤 User Profile")
+    if user.get('is_guest'):
+        st.sidebar.info(f"**Guest User**")
+        st.sidebar.caption("Limited features available")
+    else:
+        st.sidebar.success(f"**{user_id}**")
+        st.sidebar.caption(f"Role: {role.capitalize()}")
+        if user.get('email'):
+            st.sidebar.caption(f"📧 {user['email']}")
+    
+    if st.sidebar.button("🚪 Logout"):
+        logout()
     
     # Sidebar navigation
     st.sidebar.markdown("---")
