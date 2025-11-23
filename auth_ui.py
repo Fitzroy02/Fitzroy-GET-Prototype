@@ -101,7 +101,7 @@ def login_register_window():
     st.markdown('<div class="auth-title">🔐 Login / Register</div>', unsafe_allow_html=True)
     
     # Tab selection
-    auth_mode = st.radio("", ["Login", "Register"], horizontal=True, label_visibility="collapsed")
+    auth_mode = st.radio("Select authentication mode", ["Login", "Register"], horizontal=True, label_visibility="collapsed")
     
     st.markdown('<div class="auth-divider"></div>', unsafe_allow_html=True)
     
