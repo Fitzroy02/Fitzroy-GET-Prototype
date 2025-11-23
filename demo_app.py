@@ -128,6 +128,19 @@ def main():
     # Load sessions data
     sessions = load_json("sessions.json")
     
+    # Role selector and sidebar navigation (must be defined first)
+    role = st.sidebar.selectbox("Select role", ["student", "practitioner"])
+    user_id = st.sidebar.text_input("User ID", "user-001")
+    
+    # Sidebar navigation
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### 🧭 Navigation")
+    page = st.sidebar.radio(
+        "Go to:",
+        ["🏠 Home", "📚 My Library", "🔍 Search", "📤 Upload (Practitioner)"],
+        key="page_nav"
+    )
+    
     # Page routing based on sidebar navigation
     if page == "📚 My Library":
         library_view(user_id, role)
@@ -146,19 +159,6 @@ def main():
         st.markdown("---")
         # Jump to search section (handled below)
     # else: page == "🏠 Home" - continue with normal flow
-
-    # Role selector follows after welcome videos
-    role = st.sidebar.selectbox("Select role", ["student", "practitioner"])
-    user_id = st.sidebar.text_input("User ID", "user-001")
-    
-    # Sidebar navigation
-    st.sidebar.markdown("---")
-    st.sidebar.markdown("### 🧭 Navigation")
-    page = st.sidebar.radio(
-        "Go to:",
-        ["🏠 Home", "📚 My Library", "🔍 Search", "📤 Upload (Practitioner)"],
-        key="page_nav"
-    )
     
     # Calculate and display video completion progress
     cursor.execute("SELECT video_key, status FROM viewed_flags WHERE user=?", (user_id,))
