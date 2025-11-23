@@ -7,6 +7,7 @@ from auth_ui import login_register_window, check_authentication, get_current_use
 import sqlite3
 from datetime import datetime
 import re
+import os
 
 def convert_youtube_url(url):
     """Convert YouTube watch URL to embed URL for better compatibility"""
@@ -346,9 +347,28 @@ def main():
                 if ctype == "book":
                     st.download_button("Download Book", data="(placeholder)", file_name=title+".pdf", key=f"download_{item_id}")
                 elif ctype in ["video", "movie"]:
-                    video_data = load_video(path)
-                    if video_data:
-                        st.video(video_data)
+                    # Case 1: YouTube link
+                    if "youtube.com" in path or "youtu.be" in path:
+                        # Convert to embed URL if needed
+                        if "watch?v=" in path:
+                            video_id = path.split("watch?v=")[-1].split("&")[0]
+                            embed_url = f"https://www.youtube.com/embed/{video_id}"
+                        elif "youtu.be" in path:
+                            video_id = path.split("/")[-1]
+                            embed_url = f"https://www.youtube.com/embed/{video_id}"
+                        else:
+                            embed_url = path  # already embed format
+                        st.video(embed_url)
+                    # Case 2: Local file
+                    elif os.path.exists(path):
+                        try:
+                            with open(path, "rb") as f:
+                                st.video(f.read())
+                        except Exception as e:
+                            st.error(f"Could not open video file: {e}")
+                    # Case 3: Fallback
+                    else:
+                        st.warning("Video unavailable. File not found or invalid link.")
                 
                 # 🔖 Clickable tags
                 tag_list = [t.strip() for t in tags.split(",")]
