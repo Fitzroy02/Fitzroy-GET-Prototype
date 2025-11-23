@@ -3,40 +3,76 @@ from homework_ui import submit_homework
 from storage import load_json, save_json
 
 def main():
-    st.title("🎓 Practitioner–Student Collaboration Platform")
-
-    # Welcome banner with background style
+    # Inject global CSS styles
     st.markdown(
         """
-        <div style="
-            background-color:#e6f7ff;
-            border:2px solid #2E86AB;
-            border-radius:10px;
-            padding:15px;
-            margin-bottom:20px;
-        ">
-        <h2 style="color:#2E86AB;">👋 Welcome!</h2>
-        <p style="font-size:16px; color:#333;">
-        Please enjoy these two short clips before you begin exploring the platform.<br>
-        They set the tone for collaboration and explain how consent and retention work.
-        </p>
+        <style>
+        /* General font and colors */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333333;
+            background-color: #F9FAFB;
+        }
+
+        /* Headings */
+        h1, h2, h3 {
+            color: #2E86AB; /* Primary accent blue */
+            font-weight: 600;
+        }
+
+        /* Welcome banner */
+        .welcome-banner {
+            background-color: #e6f7ff;
+            border: 2px solid #2E86AB;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #fafafa;
+            border-top: 2px solid #2E86AB;
+            border-radius: 0 0 10px 10px;
+            padding: 12px;
+            margin-top: 40px;
+            font-size: 13px;
+            color: #555555;
+            text-align: center;
+        }
+
+        /* Links */
+        a {
+            color: #2E86AB;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    st.title("🎓 Practitioner–Student Collaboration Platform")
+
+    # Welcome banner
+    st.markdown(
+        """
+        <div class="welcome-banner">
+        <h2>👋 Welcome!</h2>
+        <p>Please enjoy these two short clips before you begin exploring the platform.<br>
+        They set the tone for collaboration and explain how consent and retention work.</p>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    # Whistling ad (first welcome video)
+    # Videos
     st.subheader("🎶 Whistling Ad")
-    st.markdown(
-        "*A creative whistling ad that sets the tone for learning and collaboration.*"
-    )
     st.video("https://www.youtube.com/watch?v=YTp7UQNE0Dw")
 
-    # Intro video (second welcome video)
     st.subheader("📺 Platform Introduction")
-    st.markdown(
-        "*This short video introduces the platform, explaining consent, retention, and session flow.*"
-    )
     st.video("https://www.youtube.com/watch?v=QYYvgFzR8Qc")
 
     # Load sessions data
@@ -68,21 +104,12 @@ def main():
             save_json("sessions.json", sessions)
             st.success(f"Session '{new_title}' created!")
 
-    # Footer message for transparency and consistency
+    # Footer
     st.markdown(
         """
-        <div style="
-            background-color:#fafafa;
-            border-top:2px solid #2E86AB;
-            border-radius:0 0 10px 10px;
-            padding:12px;
-            margin-top:40px;
-            font-size:13px;
-            color:#555;
-            text-align:center;
-        ">
+        <div class="footer">
         📜 Consent Reminder: By using this platform, you agree to the 
-        <a href='./STUDENT_INFO.md' style="color:#2E86AB; text-decoration:none;">Student & Patient Information</a>.
+        <a href='./STUDENT_INFO.md'>Student & Patient Information</a>.
         </div>
         """,
         unsafe_allow_html=True
