@@ -195,23 +195,29 @@ def main():
     st.write(f"Viewed: {len(completed)}, Skipped: {len(skipped)}")
     st.markdown("---")
     
-    # Display videos with tracking
-    for video in videos:
-        st.subheader(video["title"])
-        st.video(video["url"])
+    # Single unified video player with selector
+    st.subheader("🎬 Video Player")
+    selected_video = st.selectbox(
+        "Select a video to watch:",
+        options=videos,
+        format_func=lambda v: v["title"]
+    )
+    
+    if selected_video:
+        st.video(selected_video["url"])
         
         col1, col2 = st.columns(2)
-        if col1.button(f"Mark Viewed", key=f"{video['key']}_viewed"):
+        if col1.button(f"Mark Viewed", key=f"{selected_video['key']}_viewed"):
             cursor.execute("INSERT INTO viewed_flags VALUES (?, ?, ?, ?)",
-                          (user_id, video["key"], "viewed", datetime.now().isoformat()))
+                          (user_id, selected_video["key"], "viewed", datetime.now().isoformat()))
             conn.commit()
-            st.success(f"{video['title']} marked as viewed!")
+            st.success(f"{selected_video['title']} marked as viewed!")
         
-        if col2.button(f"Skip", key=f"{video['key']}_skipped"):
+        if col2.button(f"Skip", key=f"{selected_video['key']}_skipped"):
             cursor.execute("INSERT INTO viewed_flags VALUES (?, ?, ?, ?)",
-                          (user_id, video["key"], "skipped", datetime.now().isoformat()))
+                          (user_id, selected_video["key"], "skipped", datetime.now().isoformat()))
             conn.commit()
-            st.warning(f"{video['title']} skipped.")
+            st.warning(f"{selected_video['title']} skipped.")
     
     st.info("End of demo content. In a real deployment, your own onboarding materials would appear here.")
     
@@ -317,20 +323,39 @@ def main():
         else:
             st.warning("No matches found.")
 
+    # Role-based dashboard shortcuts
+    st.markdown("---")
+    st.header("Quick Actions")
+    
     if role == "student":
-        st.header("Student Dashboard")
-        # Example: show homework submission for a given session
-        session_id = st.selectbox("Choose session", list(sessions.keys()))
-        if session_id:
-            submit_homework(session_id, user_id)
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.info("📚 **My Library**\nAccess your purchased content")
+        with col2:
+            st.info("🔍 **Search**\nDiscover new content")
+        with col3:
+            st.info("📝 **Homework**\nSubmit assignments")
+        
+        # Homework submission for a given session
+        if sessions:
+            session_id = st.selectbox("Choose session for homework", list(sessions.keys()))
+            if session_id:
+                submit_homework(session_id, user_id)
 
     elif role == "practitioner":
-        # Show upload interface for practitioners
-        upload_interface(user_id, role)
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            if st.button("📤 Upload Content", use_container_width=True):
+                st.info("Navigate to **📤 Upload (Practitioner)** page")
+        with col2:
+            if st.button("📚 Manage Library", use_container_width=True):
+                st.info("Navigate to **📚 My Library** page")
+        with col3:
+            if st.button("🔍 Browse Content", use_container_width=True):
+                st.info("Navigate to **🔍 Search** page")
         
         st.markdown("---")
-        st.header("Practitioner Dashboard")
-        st.write("Here you can manage sessions, privacy, and retention policies.")
+        st.subheader("Session Management")
         # Example: create a new session
         new_title = st.text_input("New session title")
         if st.button("Create Session"):
