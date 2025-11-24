@@ -266,7 +266,7 @@ def upload_content(file, title, author, tags, description, content_type, user_id
 
 
 def update_content_schema():
-    """Update database schema to support new fields (author, description, uploaded_by)"""
+    """Update database schema to support comprehensive content metadata"""
     import sqlite3
     
     conn = sqlite3.connect("content_index.db")
@@ -276,12 +276,23 @@ def update_content_schema():
     cursor.execute("PRAGMA table_info(content)")
     columns = [col[1] for col in cursor.fetchall()]
     
+    # Legacy columns
     if "author" not in columns:
         cursor.execute("ALTER TABLE content ADD COLUMN author TEXT")
     if "description" not in columns:
         cursor.execute("ALTER TABLE content ADD COLUMN description TEXT")
     if "uploaded_by" not in columns:
         cursor.execute("ALTER TABLE content ADD COLUMN uploaded_by TEXT")
+    
+    # New comprehensive metadata columns
+    if "user_role" not in columns:
+        cursor.execute("ALTER TABLE content ADD COLUMN user_role TEXT DEFAULT 'student'")
+    if "source" not in columns:
+        cursor.execute("ALTER TABLE content ADD COLUMN source TEXT DEFAULT 'local_file'")
+    if "url" not in columns:
+        cursor.execute("ALTER TABLE content ADD COLUMN url TEXT")
+    if "purchase_status" not in columns:
+        cursor.execute("ALTER TABLE content ADD COLUMN purchase_status TEXT DEFAULT 'uploaded'")
     
     conn.commit()
     conn.close()

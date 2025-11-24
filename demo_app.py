@@ -59,17 +59,24 @@ def init_onboarding_db():
     return conn, c
 
 def init_content_db():
-    """Initialize content index database"""
+    """Initialize content index database with comprehensive schema"""
     conn = sqlite3.connect("content_index.db")
     c = conn.cursor()
     c.execute("""
     CREATE TABLE IF NOT EXISTS content (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT,
-        type TEXT,
-        tags TEXT,
+        title TEXT NOT NULL,
+        author TEXT,
+        user_role TEXT,
+        type TEXT NOT NULL,
+        source TEXT NOT NULL,
         path TEXT,
-        added_at TEXT
+        url TEXT,
+        tags TEXT,
+        purchase_status TEXT,
+        added_at TEXT NOT NULL,
+        description TEXT,
+        uploaded_by TEXT
     )
     """)
     conn.commit()
@@ -290,19 +297,54 @@ def main():
         
         st.markdown("---")
     
-    def add_content(title, ctype, tags, path):
-        """Add new content metadata to the database."""
-        content_cursor.execute("INSERT INTO content (title, type, tags, path, added_at) VALUES (?, ?, ?, ?, ?)",
-                              (title, ctype, tags, path, datetime.now().isoformat()))
+    def add_content(title, author, user_role, ctype, source, path_or_url, tags, purchase_status):
+        """Add new content metadata to the database with comprehensive fields."""
+        # Determine path vs url based on source
+        path = path_or_url if source == "local_file" else None
+        url = path_or_url if source in ["youtube_link", "external_url"] else None
+        
+        content_cursor.execute("""
+            INSERT INTO content 
+            (title, author, user_role, type, source, path, url, tags, purchase_status, added_at, uploaded_by)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (title, author, user_role, ctype, source, path, url, tags, purchase_status, 
+              datetime.now().isoformat(), "system"))
         content_conn.commit()
     
     # Add demo content if database is empty
     content_cursor.execute("SELECT COUNT(*) FROM content")
     if content_cursor.fetchone()[0] == 0:
         # Use YouTube videos for demo content (no local files needed)
-        add_content("Whistling Ad Demo", "video", "training, demo, introduction", "https://www.youtube.com/watch?v=YTp7UQNE0Dw")
-        add_content("Platform Introduction", "video", "training, demo, tutorial", "https://www.youtube.com/watch?v=QYYvgFzR8Qc")
-        add_content("Getting Started Guide", "book", "documentation, guide", "https://example.com/placeholder-guide.pdf")
+        add_content(
+            "Whistling Ad Demo", 
+            "Marketing Team", 
+            "Practitioner", 
+            "video", 
+            "youtube_link",
+            "https://www.youtube.com/embed/YTp7UQNE0Dw",
+            "training, demo, introduction",
+            "curated"
+        )
+        add_content(
+            "Platform Introduction",
+            "John T. Hope",
+            "Practitioner",
+            "video",
+            "youtube_link", 
+            "https://www.youtube.com/embed/QYYvgFzR8Qc",
+            "training, demo, tutorial",
+            "curated"
+        )
+        add_content(
+            "Getting Started Guide",
+            "Documentation Team",
+            "Author",
+            "book",
+            "external_url",
+            "https://example.com/placeholder-guide.pdf",
+            "documentation, guide",
+            "curated"
+        )
     
     # 🔎 Search bar
     # Use session state to allow tag buttons to update the search
