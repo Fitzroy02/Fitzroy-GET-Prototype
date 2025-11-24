@@ -65,7 +65,7 @@ def load_audio(path):
 
 def library_view(user_id, role):
     """
-    Display user's personal library with filters, sorting, and actions
+    Display user's personal library with filters, sorting, and infinite scroll
     
     Args:
         user_id: Current user's ID
@@ -73,6 +73,14 @@ def library_view(user_id, role):
     """
     st.header("📚 My Library")
     st.write("Your personal collection of videos, audio, and books.")
+    
+    # Initialize session state for pagination
+    if 'library_page' not in st.session_state:
+        st.session_state.library_page = 1
+    if 'library_items_per_page' not in st.session_state:
+        st.session_state.library_items_per_page = 12  # 4 rows × 3 columns
+    if 'library_filter_state' not in st.session_state:
+        st.session_state.library_filter_state = None
     
     # Filters and sorting
     col1, col2, col3 = st.columns([2, 2, 1])
@@ -109,52 +117,161 @@ def library_view(user_id, role):
         if filter_book:
             content_types.extend(["book", "document"])
     
-    # Get user's library content
+    # Reset pagination if filters or sort changed
+    current_filter_state = (tuple(content_types), sort_by, view_mode)
+    if st.session_state.library_filter_state != current_filter_state:
+        st.session_state.library_page = 1
+        st.session_state.library_filter_state = current_filter_state
+    
+    # Get user's library content with batch loading
     conn = sqlite3.connect("content_index.db")
     cursor = conn.cursor()
     
-    # Query: Get content user has uploaded or purchased
-    # For now, we show all content (Phase 1), but in Phase 2 this will filter by ownership
+    # First, get total count for pagination info
     if content_types:
         placeholders = ','.join('?' * len(content_types))
+        count_query = f"SELECT COUNT(*) FROM content WHERE type IN ({placeholders})"
+        cursor.execute(count_query, content_types)
+        total_items = cursor.fetchone()[0]
+    else:
+        total_items = 0
+    
+    # Calculate offset for batch loading
+    items_per_page = st.session_state.library_items_per_page
+    offset = (st.session_state.library_page - 1) * items_per_page
+    
+    # Query: Get content user has uploaded or purchased (with OFFSET/LIMIT)
+    # For now, we show all content (Phase 1), but in Phase 2 this will filter by ownership
+    if content_types:
         query = f"""
             SELECT id, title, type, tags, path, added_at, author, description, uploaded_by, cover_image
             FROM content 
             WHERE type IN ({placeholders})
+            LIMIT ? OFFSET ?
         """
-        cursor.execute(query, content_types)
+        cursor.execute(query, content_types + [items_per_page, offset])
     else:
         cursor.execute("SELECT id, title, type, tags, path, added_at, author, description, uploaded_by, cover_image FROM content WHERE 1=0")
     
     results = cursor.fetchall()
     
-    # Sort results
+    # Note: Sorting happens in SQL query for better performance
+    # Build ORDER BY clause based on sort selection
+    order_clause = ""
     if sort_by == "Date (Newest)":
-        results = sorted(results, key=lambda x: x[5] or "", reverse=True)
+        order_clause = "ORDER BY added_at DESC"
     elif sort_by == "Date (Oldest)":
-        results = sorted(results, key=lambda x: x[5] or "")
+        order_clause = "ORDER BY added_at ASC"
     elif sort_by == "Title (A-Z)":
-        results = sorted(results, key=lambda x: x[1].lower())
+        order_clause = "ORDER BY title ASC"
     elif sort_by == "Title (Z-A)":
-        results = sorted(results, key=lambda x: x[1].lower(), reverse=True)
+        order_clause = "ORDER BY title DESC"
     elif sort_by == "Author":
-        results = sorted(results, key=lambda x: (x[6] or "").lower())
+        order_clause = "ORDER BY author ASC"
+    
+    # Re-query with sorting for current batch
+    if content_types and order_clause:
+        query = f"""
+            SELECT id, title, type, tags, path, added_at, author, description, uploaded_by, cover_image
+            FROM content 
+            WHERE type IN ({placeholders})
+            {order_clause}
+            LIMIT ? OFFSET ?
+        """
+        cursor.execute(query, content_types + [items_per_page, offset])
+        results = cursor.fetchall()
+    
+    # Calculate pagination info
+    current_page = st.session_state.library_page
+    total_pages = (total_items + items_per_page - 1) // items_per_page if total_items > 0 else 0
+    start_idx = offset
+    end_idx = min(start_idx + len(results), total_items)
+    current_batch = results
     
     # Display content
-    if results:
-        st.markdown(f"**{len(results)} items in your library**")
+    if total_items > 0 and results:
+        # Show item count and page info with loading indicator
+        col_info, col_loading = st.columns([3, 1])
+        with col_info:
+            st.markdown(f"**Showing {start_idx + 1}–{end_idx} of {total_items} items**")
+        with col_loading:
+            if 'loading_batch' in st.session_state and st.session_state.loading_batch:
+                st.spinner("Loading...")
+        
         st.markdown("")
         
         if view_mode == "List":
             # List view
-            for item in results:
+            for item in current_batch:
                 display_library_item_list(item, user_id, role, conn)
         else:
-            # Grid view (3 columns)
+            # Grid view (3 columns) - displays current batch
+            # Render grid of cards with cover image, title, author
             cols = st.columns(3)
-            for idx, item in enumerate(results):
+            for idx, item in enumerate(current_batch):
                 with cols[idx % 3]:
                     display_library_item_grid(item, user_id, role, conn)
+        
+        # Scroll event simulation and pagination controls
+        st.markdown("---")
+        
+        if total_items > items_per_page:
+            # Auto-scroll simulation: Load More button
+            pagination_cols = st.columns([1, 3, 1])
+            
+            with pagination_cols[0]:
+                # Fallback pagination: Previous button for accessibility
+                if current_page > 1:
+                    if st.button("⬅️ Previous", use_container_width=True, key="prev_page"):
+                        st.session_state.library_page -= 1
+                        st.session_state.loading_batch = True
+                        st.rerun()
+            
+            with pagination_cols[1]:
+                # Page indicator
+                st.markdown(
+                    f"<div style='text-align: center; padding: 8px; font-family: Roboto, sans-serif;'>"
+                    f"Page {current_page} of {total_pages}</div>", 
+                    unsafe_allow_html=True
+                )
+                
+                # Scroll trigger: Load More button (simulates scroll event)
+                if current_page < total_pages:
+                    with st.spinner("Loading next batch..."):
+                        if st.button(
+                            "📥 Load More Items", 
+                            use_container_width=True, 
+                            type="primary",
+                            key="load_more"
+                        ):
+                            st.session_state.library_page += 1
+                            st.session_state.loading_batch = True
+                            st.rerun()
+                else:
+                    # End-of-library message
+                    st.success("✅ End of Library - All items loaded")
+                    st.markdown(
+                        "<div style='text-align: center; color: #6B7280; font-size: 14px; padding: 10px;'>"
+                        f"You've reached the end of your library ({total_items} items total)"
+                        "</div>",
+                        unsafe_allow_html=True
+                    )
+            
+            with pagination_cols[2]:
+                # Fallback pagination: Next button for accessibility
+                if current_page < total_pages:
+                    if st.button("Next ➡️", use_container_width=True, key="next_page"):
+                        st.session_state.library_page += 1
+                        st.session_state.loading_batch = True
+                        st.rerun()
+        else:
+            # Single page library
+            st.markdown(
+                "<div style='text-align: center; color: #6B7280; font-size: 14px; padding: 10px;'>"
+                f"Showing all {total_items} items in your library"
+                "</div>",
+                unsafe_allow_html=True
+            )
     else:
         # Fallback message
         st.info("📭 No content yet — upload or purchase to begin")
