@@ -334,15 +334,15 @@ def display_library_item_grid(item, user_id, role, conn):
     """Display library item in grid view (visual card format with cover image)"""
     item_id, title, content_type, tags, path, added_at, author, description, uploaded_by, cover_image = item
     
-    # Icon/Cover based on type
+    # Icon/Cover based on type - Updated color palette
     cover_style = {
-        "video": ("🎥", "#FF6B6B", "Video"),
-        "audio": ("🎵", "#4ECDC4", "Audio"),
-        "book": ("📚", "#95E1D3", "Book"),
-        "document": ("📄", "#F38181", "Document"),
-        "movie": ("🎬", "#AA96DA", "Movie")
+        "video": ("🎥", "#EF4444", "Video"),      # Red
+        "audio": ("🎵", "#10B981", "Audio"),      # Green
+        "book": ("📚", "#8B5CF6", "Book"),        # Purple
+        "document": ("📄", "#F59E0B", "Document"), # Amber
+        "movie": ("🎬", "#EF4444", "Movie")       # Red
     }
-    icon, bg_color, type_label = cover_style.get(content_type, ("📄", "#CCCCCC", "File"))
+    icon, bg_color, type_label = cover_style.get(content_type, ("📄", "#9CA3AF", "File"))
     
     # Format date
     try:
@@ -356,43 +356,84 @@ def display_library_item_grid(item, user_id, role, conn):
     
     # Card container with vertical layout: Cover → Title → Author → Button
     with st.container():
-        # Create card with border
+        # Inject design system CSS with Roboto typography and color palette
         st.markdown("""
         <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+        
+        /* Card container styling */
         div[data-testid="stVerticalBlock"] > div:has(div[data-testid="stImage"]) {
-            border: 2px solid #E0E0E0;
+            border: 1px solid #E5E7EB;
             border-radius: 12px;
-            padding: 15px;
+            padding: 16px;
             background-color: #FFFFFF;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
         }
         div[data-testid="stVerticalBlock"] > div:has(div[data-testid="stImage"]):hover {
-            box-shadow: 0 4px 12px rgba(46,134,171,0.2);
+            box-shadow: 0 4px 12px rgba(30,64,175,0.15);
+            transform: translateY(-2px);
+        }
+        
+        /* Typography - Roboto family */
+        div[data-testid="stMarkdownContainer"] p {
+            font-family: 'Roboto', sans-serif;
+        }
+        div[data-testid="stMarkdownContainer"] strong {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #1F2937;
+            line-height: 1.4;
+        }
+        div[data-testid="stMarkdownContainer"] em {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            color: #6B7280;
+            line-height: 1.5;
+        }
+        
+        /* Button styling with deep blue accent */
+        button[kind="primary"] {
+            background-color: #1E40AF !important;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        button[kind="primary"]:hover {
+            background-color: #1E3A8A !important;
+            transform: scale(1.02);
+        }
+        button[kind="primary"]:focus {
+            box-shadow: 0 0 0 3px #93C5FD;
         }
         </style>
         """, unsafe_allow_html=True)
         
-        # Cover Image (top)
+        # Cover Image (top) - 3:4 aspect ratio
         if cover_image and os.path.isfile(cover_image):
             st.image(cover_image, use_column_width=True)
         else:
-            # Fallback: gradient background with emoji icon
+            # Fallback: gradient background with emoji icon (3:4 ratio)
             st.markdown(f"""
-            <div style="width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, {bg_color} 0%, {bg_color}CC 100%); 
-                        display: flex; align-items: center; justify-content: center; font-size: 64px; 
+            <div style="width: 100%; aspect-ratio: 3/4; background: linear-gradient(135deg, {bg_color} 0%, {bg_color}DD 100%); 
+                        display: flex; align-items: center; justify-content: center; font-size: 56px; 
                         border-radius: 8px; margin-bottom: 12px;">
                 {icon}
             </div>
             """, unsafe_allow_html=True)
         
-        # Title (bold)
+        # Title (bold, Roboto)
         st.markdown(f"**{title}**", unsafe_allow_html=False)
         
-        # Author (italic)
+        # Author (italic, Roboto)
         st.markdown(f"*{author or 'Unknown Author'}*", unsafe_allow_html=False)
         
-        # Open Button (primary action)
+        # Open Button (primary action with deep blue)
         button_label = "▶ Open" if content_type in ["video", "movie", "audio"] else "📖 Open"
         if st.button(button_label, key=f"open_{item_id}", use_container_width=True, type="primary"):
             st.session_state[f"viewing_{item_id}"] = True

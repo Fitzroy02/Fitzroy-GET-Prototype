@@ -103,51 +103,88 @@ def main():
     # Update schema to support upload features
     update_content_schema()
     
-    # Inject global CSS styles
+    # Inject global CSS styles with Roboto typography and deep blue palette
     st.markdown(
         """
         <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+        
+        /* Global Design System */
+        :root {
+            --color-bg: #F9FAFB;
+            --color-text-primary: #1F2937;
+            --color-text-secondary: #6B7280;
+            --color-primary: #1E40AF;
+            --color-primary-hover: #1E3A8A;
+            --color-border: #E5E7EB;
+        }
+        
         /* General font and colors */
         body {
-            font-family: 'Open Sans', sans-serif;
-            color: #333333;
-            background-color: #F9FAFB;
+            font-family: 'Roboto', sans-serif;
+            color: var(--color-text-primary);
+            background-color: var(--color-bg);
         }
 
-        /* Headings */
+        /* Headings - Deep blue accent */
         h1, h2, h3 {
-            color: #2E86AB; /* Primary accent blue */
-            font-weight: 600;
+            color: var(--color-primary);
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
         }
+        
+        h1 { font-size: 32px; }
+        h2 { font-size: 24px; }
+        h3 { font-size: 18px; }
 
         /* Welcome banner */
         .welcome-banner {
-            background-color: #e6f7ff;
-            border: 2px solid #2E86AB;
-            border-radius: 10px;
-            padding: 15px;
+            background-color: #EFF6FF;
+            border: 2px solid var(--color-primary);
+            border-radius: 12px;
+            padding: 16px;
             margin-bottom: 20px;
+            font-family: 'Roboto', sans-serif;
         }
 
         /* Footer */
         .footer {
-            background-color: #fafafa;
-            border-top: 2px solid #2E86AB;
-            border-radius: 0 0 10px 10px;
-            padding: 12px;
+            background-color: #FFFFFF;
+            border-top: 2px solid var(--color-border);
+            border-radius: 0 0 12px 12px;
+            padding: 16px;
             margin-top: 40px;
-            font-size: 13px;
-            color: #555555;
+            font-size: 14px;
+            color: var(--color-text-secondary);
             text-align: center;
+            font-family: 'Roboto', sans-serif;
         }
 
         /* Links */
         a {
-            color: #2E86AB;
+            color: var(--color-primary);
             text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            transition: color 0.3s ease;
         }
         a:hover {
+            color: var(--color-primary-hover);
             text-decoration: underline;
+        }
+        
+        /* Buttons - Consistent styling */
+        button {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Text elements */
+        p, li, span {
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
         }
         </style>
         """,
