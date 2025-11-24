@@ -299,9 +299,10 @@ def main():
     # Add demo content if database is empty
     content_cursor.execute("SELECT COUNT(*) FROM content")
     if content_cursor.fetchone()[0] == 0:
-        add_content("Philosophy of AI", "book", "ethics, ai", "/user/storage/books/philosophy_ai.pdf")
-        add_content("Onboarding Demo Video", "video", "training, demo", "/user/storage/videos/demo1.mp4")
-        add_content("Classic Movie Clip", "movie", "cinema, demo", "/user/storage/movies/classic.mp4")
+        # Use YouTube videos for demo content (no local files needed)
+        add_content("Whistling Ad Demo", "video", "training, demo, introduction", "https://www.youtube.com/watch?v=YTp7UQNE0Dw")
+        add_content("Platform Introduction", "video", "training, demo, tutorial", "https://www.youtube.com/watch?v=QYYvgFzR8Qc")
+        add_content("Getting Started Guide", "book", "documentation, guide", "https://example.com/placeholder-guide.pdf")
     
     # 🔎 Search bar
     # Use session state to allow tag buttons to update the search
