@@ -6,6 +6,16 @@ import sqlite3
 from datetime import datetime
 import re
 import os
+import base64
+
+
+def get_image_base64(image_path):
+    """Convert image file to base64 string for inline display"""
+    try:
+        with open(image_path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    except:
+        return ""
 
 
 def convert_youtube_url(url):
@@ -108,13 +118,13 @@ def library_view(user_id, role):
     if content_types:
         placeholders = ','.join('?' * len(content_types))
         query = f"""
-            SELECT id, title, type, tags, path, added_at, author, description, uploaded_by
+            SELECT id, title, type, tags, path, added_at, author, description, uploaded_by, cover_image
             FROM content 
             WHERE type IN ({placeholders})
         """
         cursor.execute(query, content_types)
     else:
-        cursor.execute("SELECT id, title, type, tags, path, added_at, author, description, uploaded_by FROM content WHERE 1=0")
+        cursor.execute("SELECT id, title, type, tags, path, added_at, author, description, uploaded_by, cover_image FROM content WHERE 1=0")
     
     results = cursor.fetchall()
     
@@ -160,7 +170,7 @@ def library_view(user_id, role):
 
 def display_library_item_list(item, user_id, role, conn):
     """Display library item in list view"""
-    item_id, title, content_type, tags, path, added_at, author, description, uploaded_by = item
+    item_id, title, content_type, tags, path, added_at, author, description, uploaded_by, cover_image = item
     
     # Icon based on type
     icon = {
@@ -180,17 +190,45 @@ def display_library_item_list(item, user_id, role, conn):
     
     # Ownership status
     is_owner = uploaded_by == user_id
-    ownership_status = "Uploaded: Yes" if is_owner else "Purchased: Yes"
     
-    # Container for item
+    # Cover style based on type
+    cover_style = {
+        "video": ("🎥", "#FF6B6B", "Video"),
+        "audio": ("🎵", "#4ECDC4", "Audio"),
+        "book": ("📚", "#95E1D3", "Book"),
+        "document": ("📄", "#F38181", "Document"),
+        "movie": ("🎬", "#AA96DA", "Movie")
+    }
+    icon, bg_color, type_label = cover_style.get(content_type, ("📄", "#CCCCCC", "File"))
+    
+    # Container with horizontal cover layout
     with st.container():
+        # Show actual cover image if available, otherwise use gradient + icon
+        if cover_image and os.path.isfile(cover_image):
+            cover_html = f'<img src="data:image/png;base64,{get_image_base64(cover_image)}" style="width: 100%; height: 100%; object-fit: cover;">'
+        else:
+            cover_html = f'<div style="width: 100%; height: 100%; background: linear-gradient(135deg, {bg_color} 0%, {bg_color}CC 100%); display: flex; align-items: center; justify-content: center; font-size: 40px;">{icon}</div>'
+        
         st.markdown(f"""
-        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px; background-color: #fafafa;">
-            <h4 style="margin: 0; color: #2E86AB;">{icon} {title}</h4>
-            <p style="margin: 5px 0; color: #666; font-size: 14px;">
-                <strong>Author:</strong> {author or "Unknown"} | <strong>Tags:</strong> {tags or "none"}<br>
-                <strong>{ownership_status}</strong> | <strong>Date:</strong> {formatted_date}
-            </p>
+        <div style="border: 2px solid #2E86AB; border-radius: 10px; overflow: hidden; margin-bottom: 15px; background-color: #ffffff;">
+            <div style="display: flex; flex-direction: row; align-items: stretch; min-height: 100px;">
+                <!-- Cover Image Section -->
+                <div style="flex: 0 0 100px; overflow: hidden;">
+                    {cover_html}
+                </div>
+                <!-- Content Section -->
+                <div style="flex: 1; padding: 12px 15px; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-weight: 600; font-size: 15px; color: #2E86AB; margin-bottom: 4px;">
+                        Title: {title}
+                    </div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 3px;">
+                        Author: {author or "Unknown"}
+                    </div>
+                    <div style="font-size: 11px; color: #999;">
+                        {type_label} • Added {formatted_date} • {tags or "No tags"}
+                    </div>
+                </div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         
@@ -293,17 +331,18 @@ def display_library_item_list(item, user_id, role, conn):
 
 
 def display_library_item_grid(item, user_id, role, conn):
-    """Display library item in grid view (card format)"""
-    item_id, title, content_type, tags, path, added_at, author, description, uploaded_by = item
+    """Display library item in grid view (card format with cover image)"""
+    item_id, title, content_type, tags, path, added_at, author, description, uploaded_by, cover_image = item
     
-    # Icon based on type
-    icon = {
-        "video": "🎥",
-        "audio": "🎵",
-        "book": "📚",
-        "document": "📄",
-        "movie": "🎬"
-    }.get(content_type, "📄")
+    # Icon/Cover based on type
+    cover_style = {
+        "video": ("🎥", "#FF6B6B", "Video"),
+        "audio": ("🎵", "#4ECDC4", "Audio"),
+        "book": ("📚", "#95E1D3", "Book"),
+        "document": ("📄", "#F38181", "Document"),
+        "movie": ("🎬", "#AA96DA", "Movie")
+    }
+    icon, bg_color, type_label = cover_style.get(content_type, ("📄", "#CCCCCC", "File"))
     
     # Format date
     try:
@@ -315,16 +354,34 @@ def display_library_item_grid(item, user_id, role, conn):
     # Ownership status
     is_owner = uploaded_by == user_id
     
-    # Card container
+    # Card container with cover image layout
     with st.container():
+        # Show actual cover image if available, otherwise use gradient + icon
+        if cover_image and os.path.isfile(cover_image):
+            cover_html = f'<img src="data:image/png;base64,{get_image_base64(cover_image)}" style="width: 100%; height: 100%; object-fit: cover;">'
+        else:
+            cover_html = f'<div style="width: 100%; height: 100%; background: linear-gradient(135deg, {bg_color} 0%, {bg_color}CC 100%); display: flex; align-items: center; justify-content: center; font-size: 48px;">{icon}</div>'
+        
         st.markdown(f"""
-        <div style="border: 2px solid #2E86AB; border-radius: 10px; padding: 15px; margin-bottom: 20px; background-color: #f9fafb; min-height: 200px;">
-            <div style="text-align: center; font-size: 48px; margin-bottom: 10px;">{icon}</div>
-            <h4 style="margin: 5px 0; text-align: center; color: #2E86AB;">{title}</h4>
-            <p style="margin: 5px 0; color: #666; font-size: 12px; text-align: center;">
-                {author or "Unknown"}<br>
-                {formatted_date}
-            </p>
+        <div style="border: 2px solid #2E86AB; border-radius: 10px; overflow: hidden; margin-bottom: 20px; background-color: #ffffff;">
+            <div style="display: flex; flex-direction: row; align-items: stretch; min-height: 120px;">
+                <!-- Cover Image Section -->
+                <div style="flex: 0 0 120px; overflow: hidden;">
+                    {cover_html}
+                </div>
+                <!-- Content Section -->
+                <div style="flex: 1; padding: 15px; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-weight: 600; font-size: 16px; color: #2E86AB; margin-bottom: 5px;">
+                        {title}
+                    </div>
+                    <div style="font-size: 13px; color: #666;">
+                        Author: {author or "Unknown"}
+                    </div>
+                    <div style="font-size: 11px; color: #999; margin-top: 5px;">
+                        {type_label} • {formatted_date}
+                    </div>
+                </div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         

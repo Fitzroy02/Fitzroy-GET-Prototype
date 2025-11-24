@@ -76,7 +76,8 @@ def init_content_db():
         purchase_status TEXT,
         added_at TEXT NOT NULL,
         description TEXT,
-        uploaded_by TEXT
+        uploaded_by TEXT,
+        cover_image TEXT
     )
     """)
     conn.commit()
@@ -297,7 +298,7 @@ def main():
         
         st.markdown("---")
     
-    def add_content(title, author, user_role, ctype, source, path_or_url, tags, purchase_status):
+    def add_content(title, author, user_role, ctype, source, path_or_url, tags, purchase_status, cover_image=""):
         """Add new content metadata to the database with comprehensive fields."""
         # Determine path vs url based on source
         path = path_or_url if source == "local_file" else None
@@ -305,10 +306,10 @@ def main():
         
         content_cursor.execute("""
             INSERT INTO content 
-            (title, author, user_role, type, source, path, url, tags, purchase_status, added_at, uploaded_by)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (title, author, user_role, type, source, path, url, tags, purchase_status, added_at, uploaded_by, cover_image)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (title, author, user_role, ctype, source, path, url, tags, purchase_status, 
-              datetime.now().isoformat(), "system"))
+              datetime.now().isoformat(), "system", cover_image))
         content_conn.commit()
     
     # Add demo content if database is empty
@@ -323,7 +324,8 @@ def main():
             "youtube_link",
             "https://www.youtube.com/embed/YTp7UQNE0Dw",
             "training, demo, introduction",
-            "curated"
+            "curated",
+            "covers/whistling_ad.png"
         )
         add_content(
             "Platform Introduction",
@@ -333,7 +335,8 @@ def main():
             "youtube_link", 
             "https://www.youtube.com/embed/QYYvgFzR8Qc",
             "training, demo, tutorial",
-            "curated"
+            "curated",
+            "covers/platform_intro.png"
         )
         add_content(
             "Getting Started Guide",
@@ -343,7 +346,8 @@ def main():
             "external_url",
             "https://example.com/placeholder-guide.pdf",
             "documentation, guide",
-            "curated"
+            "curated",
+            "covers/getting_started.png"
         )
     
     # 🔎 Search bar

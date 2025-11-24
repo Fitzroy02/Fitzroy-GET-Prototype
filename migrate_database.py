@@ -36,6 +36,7 @@ def migrate_database():
         ("purchase_status", "TEXT DEFAULT 'uploaded'"),
         ("description", "TEXT"),
         ("uploaded_by", "TEXT"),
+        ("cover_image", "TEXT"),
     ]
     
     for column_name, column_type in migrations:
