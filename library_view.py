@@ -241,7 +241,6 @@ def display_library_item_list(item, user_id, role, conn):
             if content_type == "video" or content_type == "movie":
                 # Case 1: YouTube link
                 if "youtube.com" in path or "youtu.be" in path:
-                    # Convert to embed URL if needed
                     if "watch?v=" in path:
                         video_id = path.split("watch?v=")[-1].split("&")[0]
                         embed_url = f"https://www.youtube.com/embed/{video_id}"
@@ -249,10 +248,10 @@ def display_library_item_list(item, user_id, role, conn):
                         video_id = path.split("/")[-1]
                         embed_url = f"https://www.youtube.com/embed/{video_id}"
                     else:
-                        embed_url = path  # already embed format
+                        embed_url = path
                     st.video(embed_url)
                 # Case 2: Local file
-                elif os.path.exists(path):
+                elif os.path.isfile(path):
                     try:
                         with open(path, "rb") as f:
                             st.video(f.read())
@@ -260,13 +259,13 @@ def display_library_item_list(item, user_id, role, conn):
                         st.error(f"Could not open video file: {e}")
                 # Case 3: Fallback
                 else:
-                    st.warning("Video unavailable. File not found or invalid link.")
+                    st.warning(f"Video unavailable. Path not found: {path}")
             elif content_type == "audio":
                 # Case 1: URL
                 if path.startswith("http://") or path.startswith("https://"):
                     st.audio(path)
                 # Case 2: Local file
-                elif os.path.exists(path):
+                elif os.path.isfile(path):
                     try:
                         with open(path, "rb") as f:
                             st.audio(f.read())
@@ -274,7 +273,7 @@ def display_library_item_list(item, user_id, role, conn):
                         st.error(f"Could not open audio file: {e}")
                 # Case 3: Fallback
                 else:
-                    st.warning("Audio unavailable. File not found or invalid link.")
+                    st.warning(f"Audio unavailable. Path not found: {path}")
             else:
                 st.markdown(f"**{title}**")
                 st.markdown(f"*{description or 'No description available'}*")
@@ -368,7 +367,6 @@ def display_library_item_grid(item, user_id, role, conn):
                 if content_type == "video" or content_type == "movie":
                     # Case 1: YouTube link
                     if "youtube.com" in path or "youtu.be" in path:
-                        # Convert to embed URL if needed
                         if "watch?v=" in path:
                             video_id = path.split("watch?v=")[-1].split("&")[0]
                             embed_url = f"https://www.youtube.com/embed/{video_id}"
@@ -376,10 +374,10 @@ def display_library_item_grid(item, user_id, role, conn):
                             video_id = path.split("/")[-1]
                             embed_url = f"https://www.youtube.com/embed/{video_id}"
                         else:
-                            embed_url = path  # already embed format
+                            embed_url = path
                         st.video(embed_url)
                     # Case 2: Local file
-                    elif os.path.exists(path):
+                    elif os.path.isfile(path):
                         try:
                             with open(path, "rb") as f:
                                 st.video(f.read())
@@ -387,13 +385,13 @@ def display_library_item_grid(item, user_id, role, conn):
                             st.error(f"Could not open video file: {e}")
                     # Case 3: Fallback
                     else:
-                        st.warning("Video unavailable. File not found or invalid link.")
+                        st.warning(f"Video unavailable. Path not found: {path}")
                 elif content_type == "audio":
                     # Case 1: URL
                     if path.startswith("http://") or path.startswith("https://"):
                         st.audio(path)
                     # Case 2: Local file
-                    elif os.path.exists(path):
+                    elif os.path.isfile(path):
                         try:
                             with open(path, "rb") as f:
                                 st.audio(f.read())
@@ -401,7 +399,7 @@ def display_library_item_grid(item, user_id, role, conn):
                             st.error(f"Could not open audio file: {e}")
                     # Case 3: Fallback
                     else:
-                        st.warning("Audio unavailable. File not found or invalid link.")
+                        st.warning(f"Audio unavailable. Path not found: {path}")
                 else:
                     st.markdown(description or "No description")
                     try:

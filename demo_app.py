@@ -350,7 +350,6 @@ def main():
                 elif ctype in ["video", "movie"]:
                     # Case 1: YouTube link
                     if "youtube.com" in path or "youtu.be" in path:
-                        # Convert to embed URL if needed
                         if "watch?v=" in path:
                             video_id = path.split("watch?v=")[-1].split("&")[0]
                             embed_url = f"https://www.youtube.com/embed/{video_id}"
@@ -358,10 +357,10 @@ def main():
                             video_id = path.split("/")[-1]
                             embed_url = f"https://www.youtube.com/embed/{video_id}"
                         else:
-                            embed_url = path  # already embed format
+                            embed_url = path
                         st.video(embed_url)
                     # Case 2: Local file
-                    elif os.path.exists(path):
+                    elif os.path.isfile(path):
                         try:
                             with open(path, "rb") as f:
                                 st.video(f.read())
@@ -369,7 +368,7 @@ def main():
                             st.error(f"Could not open video file: {e}")
                     # Case 3: Fallback
                     else:
-                        st.warning("Video unavailable. File not found or invalid link.")
+                        st.warning(f"Video unavailable. Path not found: {path}")
                 
                 # 🔖 Clickable tags
                 tag_list = [t.strip() for t in tags.split(",")]
