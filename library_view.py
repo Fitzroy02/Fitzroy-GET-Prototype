@@ -354,60 +354,48 @@ def display_library_item_grid(item, user_id, role, conn):
     # Ownership status
     is_owner = uploaded_by == user_id
     
-    # Card container with cover image layout
+    # Card container with vertical layout: Cover → Title → Author → Button
     with st.container():
-        # Show actual cover image if available, otherwise use gradient + icon fallback
+        # Create card with border
+        st.markdown("""
+        <style>
+        div[data-testid="stVerticalBlock"] > div:has(div[data-testid="stImage"]) {
+            border: 2px solid #E0E0E0;
+            border-radius: 12px;
+            padding: 15px;
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        div[data-testid="stVerticalBlock"] > div:has(div[data-testid="stImage"]):hover {
+            box-shadow: 0 4px 12px rgba(46,134,171,0.2);
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        # Cover Image (top)
         if cover_image and os.path.isfile(cover_image):
             st.image(cover_image, use_column_width=True)
         else:
             # Fallback: gradient background with emoji icon
             st.markdown(f"""
             <div style="width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, {bg_color} 0%, {bg_color}CC 100%); 
-                        display: flex; align-items: center; justify-content: center; font-size: 72px; 
-                        border-radius: 8px 8px 0 0; margin-bottom: 10px;">
+                        display: flex; align-items: center; justify-content: center; font-size: 64px; 
+                        border-radius: 8px; margin-bottom: 12px;">
                 {icon}
             </div>
             """, unsafe_allow_html=True)
         
-        # Title and Author
-        st.markdown(f"**{title}**")
-        st.caption(f"by {author or 'Unknown Author'}")
+        # Title (bold)
+        st.markdown(f"**{title}**", unsafe_allow_html=False)
         
-        # Open button - loads content into appropriate player
-        button_label = "▶ Play" if content_type in ["video", "movie", "audio"] else "📖 Read"
-        if st.button(f"{button_label} {title}", key=f"open_{item_id}", use_container_width=True, type="primary"):
+        # Author (italic)
+        st.markdown(f"*{author or 'Unknown Author'}*", unsafe_allow_html=False)
+        
+        # Open Button (primary action)
+        button_label = "▶ Open" if content_type in ["video", "movie", "audio"] else "📖 Open"
+        if st.button(button_label, key=f"open_{item_id}", use_container_width=True, type="primary"):
             st.session_state[f"viewing_{item_id}"] = True
-        
-        # Additional actions in columns
-        action_cols = st.columns(2)
-        with action_cols[0]:
-            if st.button("📥", key=f"grid_dl_{item_id}", use_container_width=True, help="Download"):
-                # Determine actual path/url for download
-                download_path = path if path and os.path.isfile(path) else None
-                if download_path:
-                    try:
-                        with open(download_path, "rb") as f:
-                            st.download_button(
-                                label="⬇️ Download",
-                                data=f,
-                                file_name=f"{title}.{download_path.split('.')[-1]}",
-                                mime="application/octet-stream",
-                                key=f"grid_dl_btn_{item_id}",
-                                use_container_width=True
-                            )
-                    except:
-                        st.error("File not available")
-                else:
-                    st.info("Download not available for remote content")
-        
-        with action_cols[1]:
-            if is_owner and role in ["practitioner", "author"]:
-                if st.button("🗑️", key=f"grid_rm_{item_id}", use_container_width=True, help="Remove"):
-                    cursor = conn.cursor()
-                    cursor.execute("DELETE FROM content WHERE id = ?", (item_id,))
-                    conn.commit()
-                    st.success("Removed!")
-                    st.rerun()
         
         # Show content viewer if Open button was clicked
         if st.session_state.get(f"viewing_{item_id}"):
