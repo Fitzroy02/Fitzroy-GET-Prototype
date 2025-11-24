@@ -427,11 +427,11 @@ def display_library_item_grid(item, user_id, role, conn):
             </div>
             """, unsafe_allow_html=True)
         
-        # Title (bold, Roboto)
-        st.markdown(f"**{title}**", unsafe_allow_html=False)
+        # Title (bold, Roboto) - with "Title:" prefix
+        st.markdown(f"**Title:** {title}", unsafe_allow_html=False)
         
-        # Author (italic, Roboto)
-        st.markdown(f"*{author or 'Unknown Author'}*", unsafe_allow_html=False)
+        # Author (italic, Roboto) - with "Author:" prefix
+        st.markdown(f"*Author: {author or 'Unknown Author'}*", unsafe_allow_html=False)
         
         # Open Button (primary action with deep blue)
         button_label = "▶ Open" if content_type in ["video", "movie", "audio"] else "📖 Open"
