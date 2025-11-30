@@ -1,1 +1,15 @@
-* @streamlit/community-cloud
+# CODEOWNERS file
+# This file defines who must review changes to specific files or folders.
+
+# Governance and privacy policy must be reviewed by privacy and practitioner leads
+POLICY.md    @<privacy-officer> @<practitioner-lead>
+
+# README changes should be reviewed by maintainers
+README.md    @<maintainer1> @<maintainer2>
+
+# Homework UI changes require practitioner lead review
+homework_ui.py    @<practitioner-lead>
+
+# Storage and app integration changes require technical maintainer review
+storage.py    @<maintainer1>
+streamlit_app.py    @<maintainer1>
