@@ -148,7 +148,7 @@ def main():
     st.header("Upload Audio or Video")
 
     # Upload audio or video
-    media_file = st.file_uploader(
+    audio_video_file = st.file_uploader(
         "Select an audio or video file",
         type=["mp3", "wav", "ogg", "mp4", "webm", "mov"],
         key="media_upload"
@@ -188,15 +188,15 @@ def main():
         st.info("Playing test audio.")
 
     # Playback logic for uploaded media
-    if media_file is not None:
-        file_type = media_file.type
+    if audio_video_file is not None:
+        file_type = audio_video_file.type
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         with st.expander("Preview Uploaded Media"):
             if file_type.startswith("audio"):
-                st.audio(media_file)
+                st.audio(audio_video_file)
             elif file_type.startswith("video"):
-                st.video(media_file)
+                st.video(audio_video_file)
             else:
                 st.error("Unsupported file type. Please upload audio or video only.")
 
