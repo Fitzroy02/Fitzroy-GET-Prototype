@@ -28,9 +28,9 @@ def render_phase_vi_dashboard(practitioner, badge_gate, curriculum_loader, annot
 
 
 def main():
-    st.set_page_config(page_title="GETS Studio V-1.6", layout="wide")
-    st.title("GETS Studio V-1.6")
-    st.subheader("A Civic Rehearsal Portal for Artists, Educators, and Ethical Thought Practitioners")
+    st.set_page_config(page_title="Civic Rehearsal Portal", layout="wide")
+    st.title("Civic Rehearsal Portal")
+    st.subheader("Upload your work, explore examples, and share with others.")
 
     # Initialize license registry in session state
     if "license_registry" not in st.session_state:
