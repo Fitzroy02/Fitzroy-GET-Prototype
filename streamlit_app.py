@@ -121,7 +121,8 @@ def main():
         def matches_category(entry, selected):
             if selected == "All":
                 return True
-            return selected in entry.get("scenario_tags", [])
+            # Use 'categories' field for consistency with UI; fallback to 'scenario_tags' for backwards compatibility
+            return selected in entry.get("categories", entry.get("scenario_tags", []))
         
         filtered_registry = [
             entry for entry in st.session_state.license_registry
