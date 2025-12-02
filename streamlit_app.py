@@ -156,7 +156,7 @@ def main():
     )
 
     # Caption input
-    caption = st.text_input("Caption")
+    caption = st.text_input("Caption", key="media_caption")
 
     # Input method: local or remote
     source_type = st.radio("File Location", ["Local", "Remote"])
