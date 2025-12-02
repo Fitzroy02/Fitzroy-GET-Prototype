@@ -137,7 +137,7 @@ def main():
         
         for item in filtered_registry:
             st.markdown(f"### {item['title']} by {item['author']}")
-            st.write("**Access:**", item.get("license_type", "N/A"))
+            st.write("**Access:**", item.get("access_type", item.get("license_type", "N/A")))
             st.write("**Price:** £", item["price"])
             st.write("**Preview Pages:**", item.get("preview_length", "N/A"))
             if item.get('filename'):
