@@ -57,7 +57,7 @@ def main():
         new_license = {
             "title": title,
             "author": author,
-            "license_type": access_type,
+            "access_type": access_type,
             "price": price,
             "allow_download": access_type == "Open",
             "preview_length": preview_pages,
