@@ -101,7 +101,7 @@ def main():
             
             elif uploaded_file.type.startswith("audio"):
                 st.markdown("### Audio Preview")
-                st.audio(uploaded_file, format="audio/mp3")
+                st.audio(uploaded_file)
             
             elif uploaded_file.type.startswith("video"):
                 st.markdown("### Video Preview")
